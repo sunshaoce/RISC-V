@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>fileTypes</key>
+    <array>
+      <string>S</string>
+      <string>s</string>
+      <string>riscv</string>
+      <string>asm</string>
+    </array>
+    <key>keyEquivalent</key>
+    <string>^~M</string>
+    <key>name</key>
+    <string>RISC-V Assembler</string>
+    <key>patterns</key>
+    <array>
+
+      <!-- pseudo instructions -->
+      <dict>
+        <key>comment</key>
+        <string>ok actually these are instructions, but one also could call them funtions…</string>
+        <key>match</key>
+        <string>\b(l[abhw]u?|ld|nop|li|l?la|mv|not|negw?|sext\.w|seqz|snez|sltz|sgtz|beqz|bnez|blez|bgez|bltz|bgtz?|ble|bgtu|bleu|jr?|jump|ret|call|tail|csr[rwsc]|csr[wsc]i)\b</string>
+        <key>name</key>
+        <string>support.function.pseudo.riscv</string>
+      </dict>
+
+      <!-- i/zifencei instructions -->
+      <dict>
+        <key>match</key>
+        <string>\b(add|addw|auipc|lui|jal|jalr|beq|bne|blt|bge|bltu|bgeu|lb|lh|lw|ld|lbu|lhu|sb|sh|sw|sd|addi|addiw|slti|sltiu|xori|ori|andi|slli|slliw|srli|srliw|srai|sraiw|sub|subw|sll|sllw|slt|sltu|xor|srl|srlw|sra|sraw|or|and|fence(\.i|\.tso)?|csrrw|csrrs|csrrc|csrrwi|csrrsi|csrrci|pause)\b</string>
+        <key>name</key>
+        <string>support.function.riscv</string>
+      </dict>
+
+      <!-- privileged instructions -->
+      <dict>
+        <key>comment</key>
+        <string>priviledged instructions</string>
+        <key>match</key>
+        <string>\b(ecall|ebreak|sfence\.vma|mret|sret|uret|wfi|dret)\b</string>
+        <key>name</key>
+        <string>support.function.riscv.privileged</string>
+      </dict>
+
+      <!-- m/zmmul instructions -->
+      <dict>
+        <key>comment</key>
+        <string>M extension (multiplication and division)</string>
+        <key>match</key>
+        <string>\b(mul|mulh|mulhsu|mulhu|div|divu|rem|remu|mulw|divw|divuw|remw|remuw)\b</string>
+        <key>name</key>
+        <string>support.function.riscv.m</string>
+      </dict>
+
+      <!-- c instructions -->
+      <dict>
+        <key>comment</key>
+        <string>C extension (compressed instructions)</string>
+        <key>match</key>
+        <string>\b(c\.addi4spn|c\.f[ls]d(sp)?|c\.lq|c\.lw|c\.f[ls]w(sp)?|c\.ld|c\.sq|c\.sw|c\.sd|c\.nop|c\.addi|c\.jal|c\.addiw|c\.li|c\.addi16sp|c\.lui|c\.srli|c\.srli64|c\.srai|c\.srai64|c\.andi|c\.sub|c\.xor|c\.or|c\.and|c\.subw|c\.addw|c\.j|c\.beqz|c\.bnez|unimp)\b</string>
+        <key>name</key>
+        <string>support.function.riscv.c</string>
+      </dict>
+
+      <!-- a instructions -->
+      <dict>
+        <key>comment</key>
+        <string>A extension (atomic instructions)</string>
+        <key>match</key>
+        <string>\b((lr|sc)\.[wd]|amo(swap|add|xor|and|or|minu?|maxu?)\.[wd](\.(aq)?(rl)?)?)\b</string>
+        <key>name</key>
+        <string>support.function.riscv.a</string>
+      </dict>
+
+      <!-- f/d/zfh/zfhmin/q/zfinx/zdinx/zhinx/zhinxmin instructions -->
+      <dict>
+        <key>comment</key>
+        <string>F extension (single precision floating point)</string>
+        <key>match</key>
+        <string>\b(fmv\.[hsdq]|fabs\.[hsdq]|fneg\.[hsdq]|fg[et]\.[hsdq]|f[ls][hwdq]|fmadd\.[hsdq]|fn?msub\.[hsdq]|fnmadd\.[hsdq]|fadd\.[hsdq]|fsub\.[hsdq]|fmul\.[hsdq]|fdiv\.[hsdq]|fsqrt\.[hsdq]|fsgnj[nx]?\.[hsdq]|fmin\.[hsdq]|fmax\.[hsdq]|fmv\.x\.[hwdq]|feq\.[hsdq]|fl[te]\.[hsdq]|fclass\.[hsdq]|fcvt\.wu?\.[hsdq]|fcvt\.[hsdq]\.wu?|fmv\.[hwdq]\.x|fcvt\.l\.[hsdq]|fcvt\.lu\.[hsdq]|fcvt\.[hsdq]\.l|fcvt\.[hsdq]\.s|fcvt\.[hsdq]\.lu)\b</string>
+        <key>name</key>
+        <string>support.function.riscv.f</string>
+      </dict>
+
+      <!-- v instructions -->
+      <dict>
+        <key>comment</key>
+        <string>V extension (Vector)</string>
+        <key>match</key>
+        <string>\b(vsetivl|vsetvl|vsetvli|vsetivli|vadd\.v[vxi]|vsub\.v[vx]|vrsub\.v[vxi]|vminu?\.v[vx]|vmaxu?\.v[vx]|vand\.v[vxi]|vx?or\.v[vxi]|vrgather\.v[vxi]|vslideup\.v[xi]|vrgatherei16.vv|vslidedown.v[xi]|vredsum\.vv|vredand\.vv|vredx?or\.vv|vredminu?\.vv|vredmaxu?\.vv|vaaddu?\.v[vx]|vasubu?\.v[vx]|vslide1up\.vx|vslide1down\.vx|vfadd\.v[vf]|vfredusum\.vv|vfsub\.v[vf]|vfredosum\.vv|vfmin\.v[vf]|vfredmin\.vv|vfmax\.v[vf]|vfredmax\.vv|vfsgnj[nx]?\.v[vf]|vfslide1up\.vf|vfslide1down\.vf|vm?adc\.v[vxi]m|vm?sbc\.[vx]|vmerge\.v[vxi]m?|vmv\.v\.[vxi]|vmseq\.v[vxi]|vmsne\.v[vxi]|vmsltu?\.v[vx]|vmsleu?\.v[vxi]|vmsgtu\.v[xi]|VWXUNARY0\.vv|VRXUNARY0\.vx|VXUNARY0\.vv|VMUNARY0\.vv|vcompress\.vv|vmandn?\.mm|vmx?or\.vv|vmorn\.vv|vmnand\.vv|vmxn?or\.vv|VWFUNARY0\.vv|VRFUNARY0\.vf|VFUNARY[01]\.vv|vfmerge\.vf|vfmv\.vf|vmfeq\.v[vf]|vmfl[et]\.v[vf]|vmfne\.v[vf]|vmfg[te]\.vf|vsaddu?\.v[vxi]|vssubu?\.v[vx]|vsll\.v[vxi]|vsmul\.v[vx]|vmv[1-8]r\.vr|vsr[la]\.v[vxi]|vssr[la]\.v[vxi]|vnsr[la]\.v[vxi]|vnclipu?\.[vxi]|vdivu?\.v[vx]|vremu?\.v[vx]|vmul[h]?\.v[vx]|vmulhs?u\.v[vx]|vmadd\.v[vx]|vnmsub\.v[vx]|vmacc\v[vx]|vnmsac\.v[vx]|vfdiv\.v[vf]|vfrdiv\.vf|vfmul\.v[vf]|vfrsub\.vf|vfn?madd\.v[vf]|vfn?msub\.v[vf]|vfn?macc\.v[vf]|vfn?msac\.v[vf]|vid\.v|v[ls]e(8|16|32|64)?(ff)?\.v|v[ls]se(8|16|32|64)?\.v|vl[ou]xei(8|16|32|64).v|v[ls][1248]r\.v|v[ls][1248]re(8|16|32|64)\.v|vwredsumu?\.vv|vwaddu?\.[wv][vx]|vwsubu?(\.w)?\.v[vx]|vwmuls?u\.v[vx]|vwmul\.v[vx]|vwmaccu?\.v[vx]|vwmaccus\.vx|vwmaccsu\.v[vx]|vfwadd(\.w)\.v[vf]|vfwred[ou]sum\.vv|vfwsub(\.w)?\.v[vf]|vfwmul\.v[vf]|vfwn?macc\.v[vf]|vfwn?msac\.v[vf]|vmv\.s\.x|vmv\.x\.s|vcpop(\.m)?|vfirst(\.m)?|v[sz]ext.vf[248]|vfmv\.s\.f|vfmv\.f\.s|vfcvt\.xu?\.f\.v|vfcvt\.f\.xu?\.v|vfcvt\.rtz\.xu?\.f\.v|vfwcvt\.xu?\.f\.v|vfwcvt\.f\.xu?\.v|vfwcvt\.f\.f\.v|vfwcvt\.rtz\.xu?\.f\.v|vfncvt\.xu?\.f\.w|vfncvt\.f\.xu?\.w|vfncvt\.f\.[fx]\.w|vfncvt\.rod\.f\.f\.w|vfncvt\.rtz\.xu?\.f\.w|vfsqrt\.v|vfrsqrt7\.v|vfrec7\.v|vfclass\.v|vms[obi]f.v|viota.v|vnot\.v|vnsrl\.wi)\b</string>
+        <key>name</key>
+        <string>support.function.riscv.v</string>
+      </dict>
+
+      <!-- b instructions -->
+      <dict>
+        <key>comment</key>
+        <string>B extension (Bit Manipulation)</string>
+        <key>match</key>
+        <string>\b(add\.uw|andn|bclri?|bexti?|binvi?|bseti?|clmul[hr]?|clzw?|cpopw?|ctzw?|maxu?|minu?|orc\.b|orn|rev8|rolw?|rori?w?|sext\.[bh]|sha[123]add\.(uw)?|slli\.uw|xnor|zext\.h)\b</string>
+        <key>name</key>
+        <string>support.function.riscv.b</string>
+      </dict>
+
+      <!-- zc instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zc extension (Code Size Reduction)</string>
+        <key>match</key>
+        <string>\b(c\.lbu|c\.lhu?|c\.s[bh]|c\.[zs]ext\.[bh]|c\.zext\.w|c\.mul|c\.not|cm\.push|cm\.pop|cm\.popret|cm\.popretz|cm\.mva01s|cm\.mvsa01|cm\.jt|cm\.jalt)\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zc</string>
+      </dict>
+
+      <!-- asm type -->
+      <dict>
+        <key>match</key>
+        <string>\.(skip|ascii|asciiz|size|asciz|byte|[248]byte|data|double|float|half|long|short|hword|quad|kdata|ktext|space|text|word|dword|dtprelword|dtpreldword|set\s*(noat|at)|[su]leb128|string|incbin|zero|rodata|comm|common|variant_cc|weak|set|fill)\b</string>
+        <key>name</key>
+        <string>storage.type.riscv</string>
+      </dict>
+
+      <!-- asm modifier -->
+      <dict>
+        <key>match</key>
+        <string>\.(balign|align|p2align|extern|globl|global|local|pushsection|section|bss|insn|option|type|equ|macro|endm|file|ident|attribute|cfi_startproc|cfi_def_cfa|cfi_def_cfa_offset|cfi_offset|cfi_endproc|addrsig)\b</string>
+        <key>name</key>
+        <string>storage.modifier.riscv</string>
+      </dict>
+
+      <!-- asm relocation  -->
+      <dict>
+        <key>match</key>
+        <string>\%(hi|lo|pcrel_hi|pcrel_lo|tprel_hi|tprel_lo|tprel_add|tls_ie_pcrel_hi|tls_gd_pcrel_hi|got_pcrel_hi)\b</string>
+        <key>name</key>
+        <string>storage.relocation.riscv</string>
+      </dict>
+
+      <!-- asm label : -->
+      <dict>
+        <key>captures</key>
+        <dict>
+          <key>1</key>
+          <dict>
+            <key>name</key>
+            <string>entity.name.function.label.riscv</string>
+          </dict>
+        </dict>
+        <key>match</key>
+        <string>\b(\.?[A-Za-z0-9_]+):</string>
+        <key>name</key>
+        <string>meta.function.label.riscv</string>
+      </dict>
+
+      <!-- asm label in instructions -->
+      <dict>
+        <key>captures</key>
+        <dict>
+          <key>1</key>
+          <dict>
+            <key>name</key>
+            <string>entity.name.function.label.instr.riscv</string>
+          </dict>
+        </dict>
+        <key>match</key>
+        <string>\b(\.L[A-Za-z0-9_\.]+)\b</string>
+        <key>name</key>
+        <string>meta.function.label.instr.riscv</string>
+      </dict>
+
+      <!-- x register -->
+      <dict>
+        <key>captures</key>
+        <dict>
+          <key>1</key>
+          <dict>
+            <key>name</key>
+            <string>punctuation.definition.variable.riscv</string>
+          </dict>
+        </dict>
+        <key>match</key>
+        <string>\b(x([12]?[0-9]|3[01]))\b</string>
+        <key>name</key>
+        <string>variable.other.register.usable.by-number.riscv</string>
+      </dict>
+
+      <!-- f register -->
+      <dict>
+        <key>captures</key>
+        <dict>
+          <key>1</key>
+          <dict>
+            <key>name</key>
+            <string>punctuation.definition.variable.riscv</string>
+          </dict>
+        </dict>
+        <key>match</key>
+        <string>\bf([12]?[0-9]|3[0-1])\b</string>
+        <key>name</key>
+        <string>variable.other.register.usable.floating-point.riscv</string>
+      </dict>
+
+      <!-- x/f register alias -->
+      <dict>
+        <key>captures</key>
+        <dict>
+          <key>1</key>
+          <dict>
+            <key>name</key>
+            <string>punctuation.definition.variable.riscv</string>
+          </dict>
+        </dict>
+        <key>match</key>
+        <string>\b(zero|ra|sp|gp|tp|f?t[0-6]|ft[7-9]|ft1[01]|f?a[0-7]|f?s[0-9]|fp|f?s1[0-1]|dyn)\b</string>
+        <key>name</key>
+        <string>variable.other.register.usable.by-name.riscv</string>
+      </dict>
+
+      <!-- v register -->
+      <dict>
+        <key>captures</key>
+        <dict>
+          <key>1</key>
+          <dict>
+            <key>name</key>
+            <string>punctuation.definition.variable.riscv</string>
+          </dict>
+        </dict>
+        <key>match</key>
+        <string>\b(v0\.t|v([12]?[0-9]|3[0-1])|vlenb|e8|e16|e32|e64|m1|m[f]?[248]|ta|tu|ma|mu)\b</string>
+        <key>name</key>
+        <string>variable.other.register.usable.vector.riscv</string>
+      </dict>
+
+      <!-- csr register -->
+      <dict>
+        <key>captures</key>
+        <dict>
+          <key>1</key>
+          <dict>
+            <key>name</key>
+            <string>punctuation.definition.variable.riscv</string>
+          </dict>
+        </dict>
+        <key>match</key>
+        <string>\b(([umsh]|vs)status|([umsh]|vs)ie|([ums]|vs)tvec|([ums]|vs)scratch|([ums]|vs)epc|([ums]|vs)cause|([umsh]|vs)tval|([umsh]|vs)ip|fflags|frm|fcsr|m?cycleh?|timeh?|m?instreth?|m?hpmcounter([3-9]|[12][0-9]|3[01])h?|[msh][ei]deleg|[msh]counteren|v?satp|hgeie|hgeip|[hm]tinst|hvip|hgatp|htimedeltah?|mvendorid|marchid|mimpid|mhartid|misa|mstatush|mtval2|pmpcfg[0-3]|pmpaddr([0-9]|1[0-5])|mcountinhibit|mhpmevent([3-9]|[12][0-9]|3[01])|tselect|tdata[1-3]|dcsr|dpc|dscratch[0-1])\b</string>
+        <key>name</key>
+        <string>variable.other.csr.names.riscv</string>
+      </dict>
+
+      <!-- integer -->
+      <dict>
+        <key>match</key>
+        <string>\b(\d+|0(x|X)[a-fA-F0-9]+)\b</string>
+        <key>name</key>
+        <string>constant.numeric.integer.riscv</string>
+      </dict>
+
+      <!-- float number -->
+      <dict>
+        <key>match</key>
+        <string>\b\d+\.\d+\b</string>
+        <key>name</key>
+        <string>constant.numeric.float.riscv</string>
+      </dict>
+
+      <!-- "" string -->
+      <dict>
+        <!-- left " -->
+        <key>begin</key>
+        <string>"</string>
+        <key>beginCaptures</key>
+        <dict>
+          <key>0</key>
+          <dict>
+            <key>name</key>
+            <string>punctuation.definition.string.begin.riscv</string>
+          </dict>
+        </dict>
+
+        <!-- right " -->
+        <key>end</key>
+        <string>"</string>
+        <key>endCaptures</key>
+        <dict>
+          <key>0</key>
+          <dict>
+            <key>name</key>
+            <string>punctuation.definition.string.end.riscv</string>
+          </dict>
+        </dict>
+
+        <!-- escape character -->
+        <key>name</key>
+        <string>string.quoted.double.riscv</string>
+        <key>patterns</key>
+        <array>
+          <dict>
+            <key>match</key>
+            <string>\\[rnt\\"]</string>
+            <key>name</key>
+            <string>constant.character.escape.riscv</string>
+          </dict>
+        </array>
+      </dict>
+
+      <!-- ' string -->
+      <dict>
+        <!-- left ' -->
+        <key>begin</key>
+        <string>'</string>
+        <key>beginCaptures</key>
+        <dict>
+          <key>0</key>
+          <dict>
+            <key>name</key>
+            <string>punctuation.definition.string.begin.riscv</string>
+          </dict>
+        </dict>
+
+        <!-- right ' -->
+        <key>end</key>
+        <string>'</string>
+        <key>endCaptures</key>
+        <dict>
+          <key>0</key>
+          <dict>
+            <key>name</key>
+            <string>punctuation.definition.string.end.riscv</string>
+          </dict>
+        </dict>
+
+        <!-- escape character -->
+        <key>name</key>
+        <string>string.quoted.single.riscv</string>
+        <key>patterns</key>
+        <array>
+          <dict>
+            <key>match</key>
+            <string>\\[rnt\\"]</string>
+            <key>name</key>
+            <string>constant.character.escape.riscv</string>
+          </dict>
+        </array>
+      </dict>
+
+      <!-- multiline comment -->
+      <dict>
+        <key>begin</key>
+        <string>\/\*</string>
+        <key>end</key>
+        <string>\*\/</string>
+        <key>name</key>
+        <string>comment.block</string>
+      </dict>
+
+      <!-- single comment -->
+      <dict>
+        <key>begin</key>
+        <string>\/\/</string>
+        <key>end</key>
+        <string>\n</string>
+        <key>name</key>
+        <string>comment.line.double-slash</string>
+      </dict>
+
+      <!-- preprocessors from C, borrowed from https://github.com/kodLite/cppStartingKit/blob/master/C%2B%2B.tmLanguage -->
+      <dict>
+        <key>begin</key>
+        <string>(?x)
+          ^\s*\#\s*(define)\s+             # define
+          ((?&lt;id&gt;[a-zA-Z_][a-zA-Z0-9_]*))  # macro name
+          (?:                              # and optionally:
+          (\()                         # an open parenthesis
+          (
+          \s* \g&lt;id&gt; \s*       # first argument
+          ((,) \s* \g&lt;id&gt; \s*)*  # additional arguments
+          (?:\.\.\.)?          # varargs ellipsis?
+          )
+          (\))                         # a close parenthesis
+          )?
+        </string>
+        <key>beginCaptures</key>
+        <dict>
+          <key>1</key>
+          <dict>
+            <key>name</key>
+            <string>keyword.control.import.define.c</string>
+          </dict>
+          <key>2</key>
+          <dict>
+            <key>name</key>
+            <string>entity.name.function.preprocessor.c</string>
+          </dict>
+          <key>4</key>
+          <dict>
+            <key>name</key>
+            <string>punctuation.definition.parameters.c</string>
+          </dict>
+          <key>5</key>
+          <dict>
+            <key>name</key>
+            <string>variable.parameter.preprocessor.c</string>
+          </dict>
+          <key>7</key>
+          <dict>
+            <key>name</key>
+            <string>punctuation.separator.parameters.c</string>
+          </dict>
+          <key>8</key>
+          <dict>
+            <key>name</key>
+            <string>punctuation.definition.parameters.c</string>
+          </dict>
+        </dict>
+        <key>end</key>
+        <string>(?=(?://|/\*))|$</string>
+        <key>name</key>
+        <string>meta.preprocessor.macro.c</string>
+        <key>patterns</key>
+        <array>
+          <dict>
+            <key>match</key>
+            <string>(?&gt;\\\s*\n)</string>
+            <key>name</key>
+            <string>punctuation.separator.continuation.c</string>
+          </dict>
+          <dict>
+            <key>include</key>
+            <string>$base</string>
+          </dict>
+        </array>
+      </dict>
+
+      <!-- Meta Preprocessor Diagnostic - C -->
+      <dict>
+        <key>begin</key>
+        <string>^\s*#\s*(error|warning)\b</string>
+        <key>captures</key>
+        <dict>
+          <key>1</key>
+          <dict>
+            <key>name</key>
+            <string>keyword.control.import.error.c</string>
+          </dict>
+        </dict>
+        <key>end</key>
+        <string>$</string>
+        <key>name</key>
+        <string>meta.preprocessor.diagnostic.c</string>
+        <key>patterns</key>
+        <array>
+          <dict>
+            <key>match</key>
+            <string>(?&gt;\\\s*\n)</string>
+            <key>name</key>
+            <string>punctuation.separator.continuation.c</string>
+          </dict>
+        </array>
+      </dict>
+
+      <!-- Meta Preprocessor Include - C -->
+      <dict>
+        <key>begin</key>
+        <string>^\s*#\s*(include|import)\b\s+</string>
+        <key>captures</key>
+        <dict>
+          <key>1</key>
+          <dict>
+            <key>name</key>
+            <string>keyword.control.import.include.c</string>
+          </dict>
+        </dict>
+        <key>end</key>
+        <string>(?=(?://|/\*))|$</string>
+        <key>name</key>
+        <string>meta.preprocessor.c.include</string>
+        <key>patterns</key>
+        <array>
+          <dict>
+            <key>match</key>
+            <string>(?&gt;\\\s*\n)</string>
+            <key>name</key>
+            <string>punctuation.separator.continuation.c</string>
+          </dict>
+          <dict>
+            <key>begin</key>
+            <string>"</string>
+            <key>beginCaptures</key>
+            <dict>
+              <key>0</key>
+              <dict>
+                <key>name</key>
+                <string>punctuation.definition.string.begin.c</string>
+              </dict>
+            </dict>
+            <key>end</key>
+            <string>"</string>
+            <key>endCaptures</key>
+            <dict>
+              <key>0</key>
+              <dict>
+                <key>name</key>
+                <string>punctuation.definition.string.end.c</string>
+              </dict>
+            </dict>
+            <key>name</key>
+            <string>string.quoted.double.include.c</string>
+          </dict>
+          <dict>
+            <key>begin</key>
+            <string>&lt;</string>
+            <key>beginCaptures</key>
+            <dict>
+              <key>0</key>
+              <dict>
+                <key>name</key>
+                <string>punctuation.definition.string.begin.c</string>
+              </dict>
+            </dict>
+            <key>end</key>
+            <string>&gt;</string>
+            <key>endCaptures</key>
+            <dict>
+              <key>0</key>
+              <dict>
+                <key>name</key>
+                <string>punctuation.definition.string.end.c</string>
+              </dict>
+            </dict>
+            <key>name</key>
+            <string>string.quoted.other.lt-gt.include.c</string>
+          </dict>
+        </array>
+      </dict>
+
+      <!-- Meta Preprocessor - C -->
+      <dict>
+        <key>begin</key>
+        <string>^\s*[#\.](define|defined|elif|else|if|ifdef|ifndef|line|pragma|undef|endif)\b</string>
+        <key>captures</key>
+        <dict>
+          <key>1</key>
+          <dict>
+            <key>name</key>
+            <string>keyword.control.import.c</string>
+          </dict>
+        </dict>
+        <key>end</key>
+        <string>(?=(?://|/\*))|$</string>
+        <key>name</key>
+        <string>meta.preprocessor.c</string>
+        <key>patterns</key>
+        <array>
+          <dict>
+            <key>match</key>
+            <string>(?&gt;\\\s*\n)</string>
+            <key>name</key>
+            <string>punctuation.separator.continuation.c</string>
+          </dict>
+        </array>
+      </dict>
+
+      <dict>
+        <key>begin</key>
+        <string>(^[ \t]+)?(?=#)</string>
+        <key>beginCaptures</key>
+        <dict>
+          <key>1</key>
+          <dict>
+            <key>name</key>
+            <string>punctuation.whitespace.comment.leading.riscv</string>
+          </dict>
+        </dict>
+        <key>end</key>
+        <string>(?!\G)</string>
+        <key>patterns</key>
+        <array>
+          <dict>
+            <key>begin</key>
+            <string>#|(\/\/)</string>
+            <key>beginCaptures</key>
+            <dict>
+              <key>0</key>
+              <dict>
+                <key>name</key>
+                <string>punctuation.definition.comment.riscv</string>
+              </dict>
+            </dict>
+            <key>end</key>
+            <string>\n</string>
+            <key>name</key>
+            <string>comment.line.number-sign.riscv</string>
+          </dict>
+        </array>
+      </dict>
+
+    </array>
+
+    <key>scopeName</key>
+    <string>source.riscv</string>
+    <key>uuid</key>
+    <!-- sunshaoce -->
+    <string>b116ecb7-8909-6fd6-b753-ecf9b5165940</string>
+  </dict>
+</plist>

@@ -1,0 +1,55 @@
+{
+    "name": "RISC-V",
+    "displayName": "RISC-V",
+    "description": "All extensions of RISC-V assembly language are supported with syntax highlighting and snippets.",
+    "version": "0.1.37",
+    "publisher": "sunshaoce",
+    "homepage": "https://github.com/sunshaoce/RISC-V.git",
+    "icon": "images/icon.png",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/sunshaoce/RISC-V.git"
+    },
+    "bugs": {
+        "url": "https://github.com/sunshaoce/RISC-V.git",
+        "email": "sunshaoce@gmail.com"
+    },
+    "engines": {
+        "vscode": "^1.5.0"
+    },
+    "categories": [
+        "Programming Languages",
+        "Snippets"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "riscv",
+                "aliases": [
+                    "RISC-V",
+                    "riscv"
+                ],
+                "extensions": [
+                    ".S",
+                    ".s",
+                    ".riscv",
+                    ".asm"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "riscv",
+                "scopeName": "source.riscv",
+                "path": "./syntaxes/riscv.tmLanguage"
+            }
+        ],
+        "snippets": [
+            {
+                "language": "riscv",
+                "path": "./snippets/snippets.json"
+            }
+        ]
+    }
+}

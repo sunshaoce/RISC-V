@@ -125,7 +125,7 @@
       <!-- asm modifier -->
       <dict>
         <key>match</key>
-        <string>\.(balign|align|p2align|extern|globl|global|local|pushsection|section|bss|insn|option|type|equ|macro|endm|file|ident|attribute|cfi_startproc|cfi_def_cfa|cfi_def_cfa_offset|cfi_offset|cfi_endproc|addrsig)\b</string>
+        <string>\.(balign|align|p2align|extern|globl|global|local|pushsection|section|bss|insn|option|type|equ|equiv|eqv|macro|endm|file|ident|attribute|cfi_startproc|cfi_def_cfa|cfi_def_cfa_offset|cfi_offset|cfi_endproc|addrsig)\b</string>
         <key>name</key>
         <string>storage.modifier.riscv</string>
       </dict>

@@ -1025,7 +1025,7 @@
         </dict>
         <key>match</key>
         <string>(?x)(
-          [0-9]+[bf] |
+          [1-9][0-9]*[bf] |
           \.L[A-Za-z0-9_\.]+:? |
           \b\.?[A-Za-z0-9_]+:
           )</string>

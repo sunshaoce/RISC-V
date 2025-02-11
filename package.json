@@ -1,8 +1,8 @@
 {
     "name": "RISC-V",
     "displayName": "RISC-V",
-    "description": "All extensions of RISC-V assembly language are supported with syntax highlighting and snippets.",
-    "version": "0.1.37",
+    "description": "Most Comprehensive RISC-V ASM Highlighting",
+    "version": "1.158.6",
     "publisher": "sunshaoce",
     "homepage": "https://github.com/sunshaoce/RISC-V.git",
     "icon": "images/icon.png",

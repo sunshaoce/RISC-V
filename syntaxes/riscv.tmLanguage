@@ -16,20 +16,89 @@
     <key>patterns</key>
     <array>
 
-      <!-- pseudo instructions -->
+      <!-- a/Zalrsc/Zaamo instructions -->
       <dict>
         <key>comment</key>
-        <string>ok actually these are instructions, but one also could call them funtions…</string>
+        <string>A extension (atomic instructions)</string>
         <key>match</key>
-        <string>\b(l[abhw]u?|ld|nop|li|l?la|mv|not|negw?|sext\.w|seqz|snez|sltz|sgtz|beqz|bnez|blez|bgez|bltz|bgtz?|ble|bgtu|bleu|jr?|jump|ret|call|tail|csr[rwsc]|csr[wsc]i)\b</string>
+        <string>(?ix)\b(
+          (
+            amoadd\.[bdhw] |
+            amoand\.[bdhw] |
+            amomaxu?\.[bdhw] |
+            amominu?\.[bdhw] |
+            amoor\.[bdhw] |
+            amoswap\.[bdhw] |
+            amoxor\.[bdhw] |
+            l[bdhw] |
+            lr\.[dw] |
+            s[bdhw] |
+            sc\.[dw]
+          )(\.(aq)?(rl)?)?
+          )\b</string>
         <key>name</key>
-        <string>support.function.pseudo.riscv</string>
+        <string>support.function.riscv.a</string>
       </dict>
 
       <!-- i/zifencei instructions -->
       <dict>
         <key>match</key>
-        <string>\b(add|addw|auipc|lui|jal|jalr|beq|bne|blt|bge|bltu|bgeu|lb|lh|lw|ld|lbu|lhu|sb|sh|sw|sd|addi|addiw|slti|sltiu|xori|ori|andi|slli|slliw|srli|srliw|srai|sraiw|sub|subw|sll|sllw|slt|sltu|xor|srl|srlw|sra|sraw|or|and|fence(\.i|\.tso)?|csrrw|csrrs|csrrc|csrrwi|csrrsi|csrrci|pause)\b</string>
+        <string>(?ix)\b(
+          add(\.uw)? |
+          addiw? |
+          addw |
+          andi? |
+          auipc |
+          beqz? |
+          bgeu? |
+          bgez |
+          bgtu |
+          bgtz? |
+          bl[et]z |
+          bleu? |
+          bltu? |
+          bnez? |
+          call |
+          csr[crsw] |
+          csrr?[csw]i? |
+          fence(\.i|\.tso)? |
+          jalr? |
+          jr? |
+          jump |
+          l[abhw]u? |
+          l[lg]a |
+          lbu? |
+          ld |
+          li |
+          lui |
+          move |
+          mv |
+          negw? |
+          nop |
+          not |
+          ori? |
+          pause |
+          rdcycleh? |
+          rdinstreth? |
+          rdtime |
+          ret |
+          s[bdhw] |
+          seqz |
+          sext\.w |
+          sgtu? |
+          sgtz |
+          slli(\.uw)? |
+          slliw |
+          sllw? |
+          slti?u? |
+          sltz |
+          snez |
+          srai?w? |
+          srli?w? |
+          subw? |
+          tail |
+          xori?
+          )\b</string>
         <key>name</key>
         <string>support.function.riscv</string>
       </dict>
@@ -39,59 +108,34 @@
         <key>comment</key>
         <string>priviledged instructions</string>
         <key>match</key>
-        <string>\b(ecall|ebreak|sfence\.vma|mret|sret|uret|wfi|dret)\b</string>
+        <string>(?ix)\b(
+          dret |
+          ebreak |
+          ecall |
+          hfence.gvma |
+          hfence.vvma |
+          hinval.gvma |
+          hinval.vvma |
+          mnret |
+          mret |
+          sbreak |
+          scall |
+          sctrclr |
+          sfence.inval.ir |
+          sfence.vma |
+          sfence.w.inval |
+          sfence\.inval\.ir |
+          sfence\.vma |
+          sfence\.w\.inval |
+          sinval.vma |
+          sinval\.vma |
+          sret |
+          unimp |
+          uret |
+          wfi
+          )\b</string>
         <key>name</key>
         <string>support.function.riscv.privileged</string>
-      </dict>
-
-      <!-- m/zmmul instructions -->
-      <dict>
-        <key>comment</key>
-        <string>M extension (multiplication and division)</string>
-        <key>match</key>
-        <string>\b(mul|mulh|mulhsu|mulhu|div|divu|rem|remu|mulw|divw|divuw|remw|remuw)\b</string>
-        <key>name</key>
-        <string>support.function.riscv.m</string>
-      </dict>
-
-      <!-- c instructions -->
-      <dict>
-        <key>comment</key>
-        <string>C extension (compressed instructions)</string>
-        <key>match</key>
-        <string>\b(c\.addi4spn|c\.f[ls]d(sp)?|c\.lq|c\.lw|c\.f[ls]w(sp)?|c\.ld|c\.sq|c\.sw|c\.sd|c\.nop|c\.addi|c\.jal|c\.addiw|c\.li|c\.addi16sp|c\.lui|c\.srli|c\.srli64|c\.srai|c\.srai64|c\.andi|c\.sub|c\.xor|c\.or|c\.and|c\.subw|c\.addw|c\.j|c\.beqz|c\.bnez|unimp)\b</string>
-        <key>name</key>
-        <string>support.function.riscv.c</string>
-      </dict>
-
-      <!-- a instructions -->
-      <dict>
-        <key>comment</key>
-        <string>A extension (atomic instructions)</string>
-        <key>match</key>
-        <string>\b((lr|sc)\.[wd]|amo(swap|add|xor|and|or|minu?|maxu?)\.[wd](\.(aq)?(rl)?)?)\b</string>
-        <key>name</key>
-        <string>support.function.riscv.a</string>
-      </dict>
-
-      <!-- f/d/zfh/zfhmin/q/zfinx/zdinx/zhinx/zhinxmin instructions -->
-      <dict>
-        <key>comment</key>
-        <string>F extension (single precision floating point)</string>
-        <key>match</key>
-        <string>\b(fmv\.[hsdq]|fabs\.[hsdq]|fneg\.[hsdq]|fg[et]\.[hsdq]|f[ls][hwdq]|fmadd\.[hsdq]|fn?msub\.[hsdq]|fnmadd\.[hsdq]|fadd\.[hsdq]|fsub\.[hsdq]|fmul\.[hsdq]|fdiv\.[hsdq]|fsqrt\.[hsdq]|fsgnj[nx]?\.[hsdq]|fmin\.[hsdq]|fmax\.[hsdq]|fmv\.x\.[hwdq]|feq\.[hsdq]|fl[te]\.[hsdq]|fclass\.[hsdq]|fcvt\.wu?\.[hsdq]|fcvt\.[hsdq]\.wu?|fmv\.[hwdq]\.x|fcvt\.l\.[hsdq]|fcvt\.lu\.[hsdq]|fcvt\.[hsdq]\.l|fcvt\.[hsdq]\.s|fcvt\.[hsdq]\.lu)\b</string>
-        <key>name</key>
-        <string>support.function.riscv.f</string>
-      </dict>
-
-      <!-- v instructions -->
-      <dict>
-        <key>comment</key>
-        <string>V extension (Vector)</string>
-        <key>match</key>
-        <string>\b(vsetivl|vsetvl|vsetvli|vsetivli|vadd\.v[vxi]|vsub\.v[vx]|vrsub\.v[vxi]|vminu?\.v[vx]|vmaxu?\.v[vx]|vand\.v[vxi]|vx?or\.v[vxi]|vrgather\.v[vxi]|vslideup\.v[xi]|vrgatherei16.vv|vslidedown.v[xi]|vredsum\.vv|vredand\.vv|vredx?or\.vv|vredminu?\.vv|vredmaxu?\.vv|vaaddu?\.v[vx]|vasubu?\.v[vx]|vslide1up\.vx|vslide1down\.vx|vfadd\.v[vf]|vfredusum\.vv|vfsub\.v[vf]|vfredosum\.vv|vfmin\.v[vf]|vfredmin\.vv|vfmax\.v[vf]|vfredmax\.vv|vfsgnj[nx]?\.v[vf]|vfslide1up\.vf|vfslide1down\.vf|vm?adc\.v[vxi]m|vm?sbc\.[vx]|vmerge\.v[vxi]m?|vmv\.v\.[vxi]|vmseq\.v[vxi]|vmsne\.v[vxi]|vmsltu?\.v[vx]|vmsleu?\.v[vxi]|vmsgtu\.v[xi]|VWXUNARY0\.vv|VRXUNARY0\.vx|VXUNARY0\.vv|VMUNARY0\.vv|vcompress\.vv|vmandn?\.mm|vmx?or\.vv|vmorn\.vv|vmnand\.vv|vmxn?or\.vv|VWFUNARY0\.vv|VRFUNARY0\.vf|VFUNARY[01]\.vv|vfmerge\.vf|vfmv\.vf|vmfeq\.v[vf]|vmfl[et]\.v[vf]|vmfne\.v[vf]|vmfg[te]\.vf|vsaddu?\.v[vxi]|vssubu?\.v[vx]|vsll\.v[vxi]|vsmul\.v[vx]|vmv[1-8]r\.vr|vsr[la]\.v[vxi]|vssr[la]\.v[vxi]|vnsr[la]\.v[vxi]|vnclipu?\.[vxi]|vdivu?\.v[vx]|vremu?\.v[vx]|vmul[h]?\.v[vx]|vmulhs?u\.v[vx]|vmadd\.v[vx]|vnmsub\.v[vx]|vmacc\v[vx]|vnmsac\.v[vx]|vfdiv\.v[vf]|vfrdiv\.vf|vfmul\.v[vf]|vfrsub\.vf|vfn?madd\.v[vf]|vfn?msub\.v[vf]|vfn?macc\.v[vf]|vfn?msac\.v[vf]|vid\.v|v[ls]e(8|16|32|64)?(ff)?\.v|v[ls]se(8|16|32|64)?\.v|vl[ou]xei(8|16|32|64).v|v[ls][1248]r\.v|v[ls][1248]re(8|16|32|64)\.v|vwredsumu?\.vv|vwaddu?\.[wv][vx]|vwsubu?(\.w)?\.v[vx]|vwmuls?u\.v[vx]|vwmul\.v[vx]|vwmaccu?\.v[vx]|vwmaccus\.vx|vwmaccsu\.v[vx]|vfwadd(\.w)\.v[vf]|vfwred[ou]sum\.vv|vfwsub(\.w)?\.v[vf]|vfwmul\.v[vf]|vfwn?macc\.v[vf]|vfwn?msac\.v[vf]|vmv\.s\.x|vmv\.x\.s|vcpop(\.m)?|vfirst(\.m)?|v[sz]ext.vf[248]|vfmv\.s\.f|vfmv\.f\.s|vfcvt\.xu?\.f\.v|vfcvt\.f\.xu?\.v|vfcvt\.rtz\.xu?\.f\.v|vfwcvt\.xu?\.f\.v|vfwcvt\.f\.xu?\.v|vfwcvt\.f\.f\.v|vfwcvt\.rtz\.xu?\.f\.v|vfncvt\.xu?\.f\.w|vfncvt\.f\.xu?\.w|vfncvt\.f\.[fx]\.w|vfncvt\.rod\.f\.f\.w|vfncvt\.rtz\.xu?\.f\.w|vfsqrt\.v|vfrsqrt7\.v|vfrec7\.v|vfclass\.v|vms[obi]f.v|viota.v|vnot\.v|vnsrl\.wi)\b</string>
-        <key>name</key>
-        <string>support.function.riscv.v</string>
       </dict>
 
       <!-- b instructions -->
@@ -99,9 +143,383 @@
         <key>comment</key>
         <string>B extension (Bit Manipulation)</string>
         <key>match</key>
-        <string>\b(add\.uw|andn|bclri?|bexti?|binvi?|bseti?|clmul[hr]?|clzw?|cpopw?|ctzw?|maxu?|minu?|orc\.b|orn|rev8|rolw?|rori?w?|sext\.[bh]|sha[123]add\.(uw)?|slli\.uw|xnor|zext\.h)\b</string>
+        <string>(?ix)\b(
+          andn |
+          bclri? |
+          bexti? |
+          binvi? |
+          bseti? |
+          clmul[hr]? |
+          clzw? |
+          cpopw? |
+          ctzw? |
+          maxu? |
+          minu? |
+          orc\.b |
+          orn |
+          rev8 |
+          rolw? |
+          rori?w? |
+          sext\.[bhw] |
+          xnor |
+          zext\.[bhw]
+          )\b</string>
         <key>name</key>
         <string>support.function.riscv.b</string>
+      </dict>
+
+      <!-- c instructions -->
+      <dict>
+        <key>comment</key>
+        <string>C extension (compressed instructions)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          c\.addi? |
+          c\.addi16sp |
+          c\.addi4spn |
+          c\.addi?w |
+          c\.andi? |
+          c\.beqz |
+          c\.bnez |
+          c\.ebreak |
+          c\.fld(sp)? |
+          c\.flw(sp)? |
+          c\.fsd(sp)? |
+          c\.fsw(sp)? |
+          c\.jalr? |
+          c\.jr? |
+          c\.ld(sp)? |
+          c\.li |
+          c\.lq |
+          c\.lui |
+          c\.lw(sp)? |
+          c\.mv |
+          c\.nop |
+          c\.or |
+          c\.sd(sp)? |
+          c\.slli |
+          c\.slli64 |
+          c\.sq |
+          c\.srai |
+          c\.srai64 |
+          c\.srli |
+          c\.srli64 |
+          c\.subw? |
+          c\.sw(sp)? |
+          c\.unimp |
+          c\.xor
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.c</string>
+      </dict>
+
+      <!-- f/d/zfh/zfhmin/q/zfinx/zdinx/zhinx/zhinxmin instructions -->
+      <dict>
+        <key>comment</key>
+        <string>F extension (single precision floating point)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          f[ls][dhqw] |
+          fabs\.[dhqs] |
+          fadd\.[dhqs] |
+          fclass\.[dhqs] |
+          fcvt\.[dhq]\.s |
+          fcvt\.[dhqs]\.lu? |
+          fcvt\.[dhqs]\.wu? |
+          fcvt\.[dqs]\.h |
+          fcvt\.[hqs]\.d |
+          fcvt\.lu?\.[dhqs] |
+          fcvt\.wu?\.[dhqs] |
+          fdiv\.[dhqs] |
+          feq\.[dhqs] |
+          fg[et]\.[dhqs] |
+          fl[te]\.[dhqs] |
+          fmadd\.[dhqs] |
+          fmax\.[dhqs] |
+          fmin\.[dhqs] |
+          fmsub\.[dhqs] |
+          fmul\.[dhqs] |
+          fmv\.[dhqsw](\.x)? |
+          fmv\.x\.[dhqsw] |
+          fn?msub\.[dhqw] |
+          fneg\.[dhqs] |
+          fnmadd\.[dhqs] |
+          fnmsub\.[dhqs] |
+          frcsr |
+          frflags |
+          frrm |
+          frsr |
+          fscsr |
+          fsflagsi? |
+          fsgnj[nx]?\.[dhqs] |
+          fsqrt\.[dhqs] |
+          fsrmi? |
+          fssr |
+          fsub\.[dhqs]
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.f</string>
+      </dict>
+
+      <!-- h instructions -->
+      <dict>
+        <key>comment</key>
+        <string>H extension (hypervisor)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          hfence\.[gv]vma |
+          hlv\.[bdhw]u? |
+          hlvx\.[hw]u |
+          hsv\.[bdhw]
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.h</string>
+      </dict>
+
+      <!-- m/zmmul instructions -->
+      <dict>
+        <key>comment</key>
+        <string>M extension (multiplication and division)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          mul |
+          divu?w? |
+          mulh |
+          mulhs?u |
+          mulw |
+          remu?w?
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.m</string>
+      </dict>
+
+      <!-- v instructions -->
+      <dict>
+        <key>comment</key>
+        <string>V extension (Vector)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          v[ls][1248]r\.v |
+          v[ls][1248]re(8|16|32|64)\.v |
+          v[ls][ou]xei(8|16|32|64)\.v |
+          v[ls][ou]xseg[2-8]ei(8|16|32|64)\.v |
+          v[ls]e(8|16|32|64)?(ff)?\.v |
+          v[ls]m\.v |
+          v[ls]s?seg[2-8]e(8|16|32|64)(ff)?\.v |
+          v[ls]se(8|16|32|64)?\.v |
+          v[sz]ext\.vf[248] |
+          vaaddu?\.v[vx] |
+          vadd\.v[ivx] |
+          vandn?\.v[ivx] |
+          vasubu?\.v[vx] |
+          vcompress\.v[vm] |
+          vdivu?\.v[vx] |
+          vfabs\.v |
+          vfadd\.v[fv] |
+          vfclass\.v |
+          vfcvt\.f\.xu?\.v |
+          vfcvt\.rtz\.xu?\.f\.v |
+          vfcvt\.xu?\.f\.v |
+          vfdiv\.v[fv] |
+          vfirst(\.m)? |
+          vfmax\.v[fv] |
+          vfmerge\.vfm? |
+          vfmin\.v[fv] |
+          vfmul\.v[fv] |
+          vfmv\.f\.s |
+          vfmv\.s\.f |
+          vfmv\.v\.f |
+          vfn?macc\.v[fv] |
+          vfn?madd\.v[fv] |
+          vfn?msac\.v[fv] |
+          vfn?msub\.v[fv] |
+          vfncvt\.f\.[fx]\.w |
+          vfncvt\.f\.xu?\.w |
+          vfncvt\.rod\.f\.f\.w |
+          vfncvt\.rtz\.xu?\.f\.w |
+          vfncvt\.xu?\.f\.w |
+          vfneg\.v |
+          vfrdiv\.vf |
+          vfrec7\.v |
+          vfwredsum\.vs |
+          vfredmax\.v[sv] |
+          vfredmin\.v[sv] |
+          vfredosum\.v[sv] |
+          vfredusum\.v[sv] |
+          vfredsum\.vs |
+          vfrsqrt7\.v |
+          vfrsub\.vf |
+          vfsgnj[nx]?\.v[fv] |
+          vfslide1down\.vf |
+          vfslide1up\.vf |
+          vfsqrt\.v |
+          vfsub\.v[fv] |
+          VFUNARY[01]\.vv |
+          vfwadd\.[vw][fv] |
+          vfwcvt\.f\.f\.v |
+          vfwcvt\.f\.xu?\.v |
+          vfwcvt\.rtz\.xu?\.f\.v |
+          vfwcvt\.xu?\.f\.v |
+          vfwmul\.v[fv] |
+          vfwn?macc\.v[fv] |
+          vfwn?msac\.v[fv] |
+          vfwred[ou]sum\.v[sv] |
+          vfwsub\.[wv][fv] |
+          vid\.v |
+          viota\.[mv] |
+          vle1\.v |
+          vm?adc\.v[ivx]m? |
+          vm?sbc\.v[vx]?m? |
+          vmacc\.v[vx] |
+          vmadd\.v[vx] |
+          vmandn?\.mm |
+          vmandnot\.mm |
+          vmaxu?\.v[vx] |
+          vmclr\.m |
+          vmerge\.v[ivx]m? |
+          vmfeq\.v[fv] |
+          vmfg[te]\.v[fv] |
+          vmfl[et]\.v[fv] |
+          vmfne\.v[fv] |
+          vminu?\.v[vx] |
+          vmmv\.m |
+          vmnand\.(mm|vv) |
+          vmnor\.mm |
+          vmnot\.m |
+          vmorn\.(mm|vv) |
+          vmornot\.mm |
+          vms[ibo]f\.m |
+          vms[obi]f\.v |
+          vmseq\.v[ivx] |
+          vmset\.m |
+          vmsgeu?\.v[ivx] |
+          vmsgtu?\.v[ivx] |
+          vmsleu?\.v[ivx] |
+          vmsltu?\.v[ivx] |
+          vmsne\.v[ivx] |
+          vmul[h]?\.v[vx] |
+          vmulhs?u\.v[vx] |
+          VMUNARY0\.vv |
+          vmv[1-8]r\.vr? |
+          vmv\.s\.x |
+          vmv\.v\.[ivx] |
+          vmv\.x\.s |
+          vmx?or\.(mm|vv) |
+          vmxn?or\.(mm|vv) |
+          vnclipu?\.w[ivx] |
+          vncvt\.x\.x\.w |
+          vneg\.v |
+          vnmsac\.v[vx] |
+          vnmsub\.v[vx] |
+          vnot\.v |
+          vnsr[la]\.[vw][ivx] |
+          vpopc\.m |
+          vredand\.v[sv] |
+          vredmaxu?\.v[sv] |
+          vredminu?\.v[sv] |
+          vredsum\.v[sv] |
+          vredx?or\.v[sv] |
+          vremu?\.v[vx] |
+          VRFUNARY0\.vf |
+          vrgather\.v[ivx] |
+          vrgatherei16\.vv |
+          vrsub\.v[ivx] |
+          VRXUNARY0\.vx |
+          vsaddu?\.v[ivx] |
+          vse1\.v |
+          vseti?vli? |
+          vslide1down\.vx |
+          vslide1up\.vx |
+          vslidedown\.v[ix] |
+          vslideup\.v[ix] |
+          vsll\.v[ivx] |
+          vsmul\.v[vx] |
+          vsr[la]\.v[ivx] |
+          vssr[la]\.v[ivx] |
+          vssubu?\.v[vx] |
+          vsub\.v[vx] |
+          vwaddu?\.[wv][vx] |
+          vwcvtu?\.x\.x\.v |
+          VWFUNARY0\.vv |
+          vwmaccsu\.v[vx] |
+          vwmaccu?\.v[vx] |
+          vwmaccus\.vx |
+          vwmul\.v[vx] |
+          vwmuls?u\.v[vx] |
+          vwredsumu?\.v[sv] |
+          vwsubu?(\.w)?\.[wv][vx] |
+          VWXUNARY0\.vv |
+          vx?or\.v[ivx] |
+          VXUNARY0\.vv
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.v</string>
+      </dict>
+
+      <!-- zacas instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zacas extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          amocas\.[bdhqw]\.?(aq)?(rl)?
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zacas</string>
+      </dict>
+
+
+      <!-- zawrs instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zawrs extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          wrs\.nto |
+          wrs\.sto
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zawrs</string>
+      </dict>
+
+
+      <!-- zba instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zba extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          sh[123]add(\.uw)?
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zba</string>
+      </dict>
+
+      <!-- zbkb instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zbkb extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          brev8 |
+          pack[hw]? |
+          unzip |
+          zip
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zbkb</string>
+      </dict>
+
+      <!-- zbkx instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zbkx extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          xperm[48]
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zbkx</string>
       </dict>
 
       <!-- zc instructions -->
@@ -109,15 +527,412 @@
         <key>comment</key>
         <string>zc extension (Code Size Reduction)</string>
         <key>match</key>
-        <string>\b(c\.lbu|c\.lhu?|c\.s[bh]|c\.[zs]ext\.[bh]|c\.zext\.w|c\.mul|c\.not|cm\.push|cm\.pop|cm\.popret|cm\.popretz|cm\.mva01s|cm\.mvsa01|cm\.jt|cm\.jalt)\b</string>
+        <string>(?ix)\b(
+          c\.[sz]ext\.[bh] |
+          c\.lbu |
+          c\.lhu? |
+          c\.mul |
+          c\.not |
+          c\.s[bh] |
+          c\.zext\.w |
+          cm\.jalt |
+          cm\.jt |
+          cm\.mva01s |
+          cm\.mvsa01 |
+          cm\.pop |
+          cm\.popretz? |
+          cm\.push
+          )\b</string>
         <key>name</key>
         <string>support.function.riscv.zc</string>
+      </dict>
+
+      <!-- zfa instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zfa extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          fcvtmod\.w\.d |
+          fgeq\.[dhs] |
+          fgtq\.[dhs] |
+          fleq\.[dhs] |
+          fli\.[dhs] |
+          fltq\.[dhs] |
+          fmaxm\.[dhs] |
+          fminm\.[dhs] |
+          fmvh\.x\.d |
+          fmvp\.d\.x |
+          fround(nx)?\.[dhs]
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zfa</string>
+      </dict>
+
+      <!-- Zfbfmin instructions -->
+      <dict>
+        <key>comment</key>
+        <string>Zfbfmin extension (Scalar BF16 Converts)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          fcvt\.bf16\.s |
+          fcvt\.s\.bf16
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zfbfmin</string>
+      </dict>
+
+      <!-- zicbom instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zicbom extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          cbo\.(clean|flush|inval)
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zicbom</string>
+      </dict>
+
+      <!-- zicbop instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zicbop extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          prefetch\.[irw]
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zicbop</string>
+      </dict>
+
+      <!-- zicboz instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zicboz extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          cbo\.zero
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zicboz</string>
+      </dict>
+
+      <!-- zicfilp instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zicfilp extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          lpad
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zicfilp</string>
+      </dict>
+
+      <!-- zicfiss instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zicfiss extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          ssamoswap.[dw](.(aq)?(rl)?)? |
+          sspopchk |
+          sspush |
+          ssrdp
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zicfiss</string>
+      </dict>
+
+      <!-- zicond instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zicond extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          czero\.eqz |
+          czero\.nez
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zicond</string>
+      </dict>
+
+      <!-- zihintntl/zihintntlc instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zihintntl extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          (c\.)?ntl\.all |
+          (c\.)?ntl\.p1 |
+          (c\.)?ntl\.pall |
+          (c\.)?ntl\.s1
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zihintntl</string>
+      </dict>
+
+      <!-- zimop instructions v0.1 -->
+      <dict>
+        <key>comment</key>
+        <string>zimop extension(May-Be-Operations Extension)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          c\.mop\.([13579]|1[135]) |
+          mop\.r\.([12]?[0-9]|3[01]) |
+          mop\.rr\.[0-7]
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zimop</string>
+      </dict>
+
+      <!-- zknd instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zknd extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          aes32dsi |
+          aes32dsmi |
+          aes64dsm? |
+          aes64im |
+          aes64ks1i |
+          aes64ks2
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zknd</string>
+      </dict>
+
+      <!-- zkne instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zkne extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          aes64esm? |
+          aes64ks1i |
+          aes64ks2
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zkne</string>
+      </dict>
+
+      <!-- zknh instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zknh extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          sha512sig[01][hl]? |
+          sha512sum[01]r?
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zknh</string>
+      </dict>
+
+      <!-- zksed instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zksed extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          sm4ed |
+          sm4ks
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zksed</string>
+      </dict>
+
+      <!-- zksh instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zksh extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          sm3p[01]
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zksh</string>
+      </dict>
+
+      <!-- zvbb instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zvbv extension (Vector BB)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          vb?rev8?\.v |
+          vc[tl]z\.v |
+          vcpop(\.[vm])? |
+          vro[rl]\.v[ivx] |
+          vwsll\.v[xvi]
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zvbb</string>
+      </dict>
+
+      <!-- zvbc instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zvbc extension (Vector BC)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          vclmulh?.v[vx]
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zvbc</string>
+      </dict>
+
+      <!-- zvbc32e instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zvbc32e extension (Vector BC)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          vghsh\.vs |
+          vgmul\.vs
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zvbc32e</string>
+      </dict>
+
+      <!-- zvfbfmin instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zvfbfmin extension (Vector BF16)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          vfncvtbf16\.f\.f\.w |
+          vfwcvtbf16\.f\.f\.v
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zvfbfmin</string>
+      </dict>
+
+      <!-- Zvfbfwma instructions -->
+      <dict>
+        <key>comment</key>
+        <string>Zvfbfwma extension (Vector BF16 widening mul-add)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          vfwmaccbf16\.v[fv]
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zvfbfwma</string>
+      </dict>
+
+      <!-- zvkg instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zvkg extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          vghsh\.vv |
+          vgmul\.vv
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zvkg</string>
+      </dict>
+
+      <!-- zvkned instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zvkned extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          vaesdf\.v[sv] |
+          vaesdm\.v[sv] |
+          vaesef\.v[sv] |
+          vaesem\.v[sv] |
+          vaeskf1\.vi |
+          vaeskf2\.vi |
+          vaesz\.vs
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zvkned</string>
+      </dict>
+
+      <!-- zvknh instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zvknh extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          vsha2ch\.vv |
+          vsha2cl\.vv |
+          vsha2ms\.vv
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zvknh</string>
+      </dict>
+
+      <!-- zvksed instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zvksed extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          vsm4k\.vi |
+          vsm4r\.v[sv]
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zvksed</string>
+      </dict>
+
+      <!-- zvksh instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zvksh extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          vsm3c\.vi |
+          vsm3me\.vv
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zvksh</string>
       </dict>
 
       <!-- asm type -->
       <dict>
         <key>match</key>
-        <string>\.(skip|ascii|asciiz|size|asciz|byte|[248]byte|data|double|float|half|long|short|hword|quad|kdata|ktext|space|text|word|dword|dtprelword|dtpreldword|set\s*(noat|at)|[su]leb128|string|incbin|zero|rodata|comm|common|variant_cc|weak|set|fill)\b</string>
+        <string>(?ix)\.(
+          [248]byte |
+          [su]leb128 |
+          asciiz? |
+          asciz |
+          byte |
+          comm |
+          common |
+          data |
+          double |
+          dtpreldword |
+          dtprelword |
+          dword |
+          fill|
+          float |
+          half |
+          hword |
+          incbin |
+          kdata |
+          ktext |
+          long |
+          org |
+          quad |
+          rodata |
+          set |
+          short |
+          single |
+          size |
+          skip |
+          space |
+          string |
+          text |
+          variant_cc |
+          weak |
+          word |
+          zero
+          )\b</string>
         <key>name</key>
         <string>storage.type.riscv</string>
       </dict>
@@ -125,15 +940,75 @@
       <!-- asm modifier -->
       <dict>
         <key>match</key>
-        <string>\.(balign|align|p2align|extern|globl|global|local|pushsection|section|bss|insn|option|type|equ|macro|endm|file|ident|attribute|cfi_startproc|cfi_def_cfa|cfi_def_cfa_offset|cfi_offset|cfi_endproc|addrsig)\b</string>
+        <string>(?ix)\.(
+          addrsig(_sym)? |
+          align |
+          attribute |
+          balign |
+          bss |
+          cfi_def_cfa(_offset)? |
+          cfi_endproc |
+          cfi_offset |
+          cfi_restore |
+          cfi_sections |
+          cfi_startproc |
+          endm |
+          equ |
+          extern |
+          file |
+          global |
+          globl |
+          ident |
+          insn[ ](b|ca|cb|ci|ciw|cj|cl|cr|cs|css|i|j|q|r|r4|s|sb|u|uj) |
+          loc |
+          local |
+          macro |
+          option([ ]arch)? |
+          p2align |
+          pushsection |
+          reloc |
+          section |
+          type
+          )\b</string>
         <key>name</key>
         <string>storage.modifier.riscv</string>
+      </dict>
+
+      <!-- insn instructions -->
+      <dict>
+        <key>comment</key>
+        <string>insn extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          BP_M |
+          BRANCH |
+          C[0-2] |
+          JALR |
+          LOAD |
+          MADD |
+          OP |
+          OP_IMM |
+          STORE
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.insn</string>
       </dict>
 
       <!-- asm relocation  -->
       <dict>
         <key>match</key>
-        <string>\%(hi|lo|pcrel_hi|pcrel_lo|tprel_hi|tprel_lo|tprel_add|tls_ie_pcrel_hi|tls_gd_pcrel_hi|got_pcrel_hi)\b</string>
+        <string>(?ix)\%(
+          got_pcrel_hi |
+          hi |
+          lo |
+          pcrel_hi |
+          pcrel_lo |
+          tls_gd_pcrel_hi |
+          tls_ie_pcrel_hi |
+          tprel_add |
+          tprel_hi |
+          tprel_lo
+          )\b</string>
         <key>name</key>
         <string>storage.relocation.riscv</string>
       </dict>
@@ -149,57 +1024,13 @@
           </dict>
         </dict>
         <key>match</key>
-        <string>\b(\.?[A-Za-z0-9_]+):</string>
+        <string>(?x)(
+          [0-9]+[bf] |
+          \.L[A-Za-z0-9_\.]+:? |
+          \b\.?[A-Za-z0-9_]+:
+          )</string>
         <key>name</key>
         <string>meta.function.label.riscv</string>
-      </dict>
-
-      <!-- asm label in instructions -->
-      <dict>
-        <key>captures</key>
-        <dict>
-          <key>1</key>
-          <dict>
-            <key>name</key>
-            <string>entity.name.function.label.instr.riscv</string>
-          </dict>
-        </dict>
-        <key>match</key>
-        <string>\b(\.L[A-Za-z0-9_\.]+)\b</string>
-        <key>name</key>
-        <string>meta.function.label.instr.riscv</string>
-      </dict>
-
-      <!-- x register -->
-      <dict>
-        <key>captures</key>
-        <dict>
-          <key>1</key>
-          <dict>
-            <key>name</key>
-            <string>punctuation.definition.variable.riscv</string>
-          </dict>
-        </dict>
-        <key>match</key>
-        <string>\b(x([12]?[0-9]|3[01]))\b</string>
-        <key>name</key>
-        <string>variable.other.register.usable.by-number.riscv</string>
-      </dict>
-
-      <!-- f register -->
-      <dict>
-        <key>captures</key>
-        <dict>
-          <key>1</key>
-          <dict>
-            <key>name</key>
-            <string>punctuation.definition.variable.riscv</string>
-          </dict>
-        </dict>
-        <key>match</key>
-        <string>\bf([12]?[0-9]|3[0-1])\b</string>
-        <key>name</key>
-        <string>variable.other.register.usable.floating-point.riscv</string>
       </dict>
 
       <!-- x/f register alias -->
@@ -213,7 +1044,30 @@
           </dict>
         </dict>
         <key>match</key>
-        <string>\b(zero|ra|sp|gp|tp|f?t[0-6]|ft[7-9]|ft1[01]|f?a[0-7]|f?s[0-9]|fp|f?s1[0-1]|dyn)\b</string>
+        <string>(?ix)\b(
+          dyn |
+          f[12]?[0-9] |
+          f3[0-1] |
+          f?a[0-7] |
+          f?s[0-9] |
+          f?s1[0-1] |
+          f?t[0-6] |
+          fp |
+          ft[7-9] |
+          ft1[01] |
+          gp |
+          ra |
+          rdn |
+          rmm |
+          rne |
+          rtz |
+          rup |
+          sp |
+          tp |
+          x[12]?[0-9] |
+          x3[01] |
+          zero
+          )\b</string>
         <key>name</key>
         <string>variable.other.register.usable.by-name.riscv</string>
       </dict>
@@ -229,7 +1083,17 @@
           </dict>
         </dict>
         <key>match</key>
-        <string>\b(v0\.t|v([12]?[0-9]|3[0-1])|vlenb|e8|e16|e32|e64|m1|m[f]?[248]|ta|tu|ma|mu)\b</string>
+        <string>(?ix)\b(
+          e(8|16|32|64) |
+          m[1248] |
+          m[au] |
+          mf?[248] |
+          t[au] |
+          v[0](\.t)? |
+          v[1-9] |
+          v[12][0-9] |
+          v3[01]
+          )\b</string>
         <key>name</key>
         <string>variable.other.register.usable.vector.riscv</string>
       </dict>
@@ -245,25 +1109,141 @@
           </dict>
         </dict>
         <key>match</key>
-        <string>\b(([umsh]|vs)status|([umsh]|vs)ie|([ums]|vs)tvec|([ums]|vs)scratch|([ums]|vs)epc|([ums]|vs)cause|([umsh]|vs)tval|([umsh]|vs)ip|fflags|frm|fcsr|m?cycleh?|timeh?|m?instreth?|m?hpmcounter([3-9]|[12][0-9]|3[01])h?|[msh][ei]deleg|[msh]counteren|v?satp|hgeie|hgeip|[hm]tinst|hvip|hgatp|htimedeltah?|mvendorid|marchid|mimpid|mhartid|misa|mstatush|mtval2|pmpcfg[0-3]|pmpaddr([0-9]|1[0-5])|mcountinhibit|mhpmevent([3-9]|[12][0-9]|3[01])|tselect|tdata[1-3]|dcsr|dpc|dscratch[0-1])\b</string>
+        <string>(?ix)\b(
+          ([hmsu]|vs)ie |
+          ([hmsu]|vs)ip |
+          ([hmsu]|vs)status |
+          ([hmsu]|vs)tval |
+          ([msu]|vs)cause |
+          ([msu]|vs)epc |
+          ([msu]|vs)scratch |
+          ([msu]|vs)tvec |
+          [hm]tinst |
+          [msh][ei]deleg |
+          [msh]counteren |
+          dcsr |
+          dpc |
+          dscratch |
+          dscratch[0-1] |
+          fcsr |
+          fflags |
+          frm |
+          hcontext |
+          henvcfgh? |
+          hgatp |
+          hgeie |
+          hgeip |
+          hidelegh |
+          hstateen[0-3]h? |
+          htimedeltah? |
+          hvictl |
+          hvienh? |
+          hviph? |
+          hviprio[12]h? |
+          io |
+          iorw |
+          jvt |
+          m?cycleh? |
+          m?hpmcounter([3-9]|[12][0-9]|3[01])h? |
+          m?instreth? |
+          marchid |
+          mconfigptr |
+          mcontext |
+          mcountinhibit |
+          mctrctl |
+          menvcfgh? |
+          mhartid |
+          mhpmevent([3-9]|[12][0-9]|3[01])h? |
+          midelegh |
+          mieh |
+          mimpid |
+          miph |
+          mireg[2-6]? |
+          misa |
+          miselect |
+          mncause |
+          mnepc |
+          mnscratch |
+          mnstatus |
+          mscontext |
+          mseccfgh? |
+          mstateen[0-3] |
+          mstateen[0-3]h |
+          mstatush |
+          mtopei |
+          mtopi |
+          mtval2 |
+          mucounteren |
+          mvendorid |
+          mvien |
+          mvienh |
+          mvip |
+          mviph |
+          pmpaddr([0-9]|[1-5][0-9]|6[0-3]) |
+          pmpcfg[0-9] |
+          pmpcfg1[0-5] |
+          r |
+          rw |
+          scontext |
+          scountovf |
+          seed |
+          senvcfg |
+          sieh? |
+          siph? |
+          sireg |
+          siselect |
+          srmcfg |
+          sstateen[0-3] |
+          stimecmph? |
+          stopei |
+          stopi |
+          tcontrol |
+          tdata[1-3] |
+          timeh? |
+          tinfo |
+          tselect |
+          v?satp |
+          vcsr |
+          vl |
+          vlenb |
+          vsi[pe]h |
+          vsireg |
+          vsiselect |
+          vstart |
+          vstimecmph? |
+          vstope?i |
+          vtype |
+          vxrm |
+          vxsat |
+          w
+          )\b</string>
         <key>name</key>
         <string>variable.other.csr.names.riscv</string>
-      </dict>
-
-      <!-- integer -->
-      <dict>
-        <key>match</key>
-        <string>\b(\d+|0(x|X)[a-fA-F0-9]+)\b</string>
-        <key>name</key>
-        <string>constant.numeric.integer.riscv</string>
       </dict>
 
       <!-- float number -->
       <dict>
         <key>match</key>
-        <string>\b\d+\.\d+\b</string>
+        <string>(?ix)\b(
+          [+-]?\d+\.\d+ |
+          [+-]?\d+\.\d+[e][+-]\d+ |
+          [+-]?\d+|0(x|X)[a-fA-F0-9]+(\.[a-fA-F0-9]*)?c?p[+-]\d+ |
+          inf |
+          nan
+          )\b</string>
         <key>name</key>
         <string>constant.numeric.float.riscv</string>
+      </dict>
+
+      <!-- integer number -->
+      <dict>
+        <key>match</key>
+        <string>(?ix)\b(
+          [+-]?\d+ |
+          [+-]?0(x|X)[a-fA-F0-9]+
+          )\b</string>
+        <key>name</key>
+        <string>constant.numeric.integer.riscv</string>
       </dict>
 
       <!-- "" string -->
@@ -369,7 +1349,7 @@
       <!-- preprocessors from C, borrowed from https://github.com/kodLite/cppStartingKit/blob/master/C%2B%2B.tmLanguage -->
       <dict>
         <key>begin</key>
-        <string>(?x)
+        <string>(?ix)
           ^\s*\#\s*(define)\s+             # define
           ((?&lt;id&gt;[a-zA-Z_][a-zA-Z0-9_]*))  # macro name
           (?:                              # and optionally:

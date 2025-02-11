@@ -2,7 +2,9 @@
 https://stackoverflow.com/questions/73673804/npm-show-npm-elf-not-found-error-in-wsl
 
 ## install vsce
-npm install @vscode/vsce
+./develop/install.sh
+nvm install node
+npm install -g @vscode/vsce
 
 ## publish
 vsce publish

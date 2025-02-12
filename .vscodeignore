@@ -1,0 +1,5 @@
+node_modules/
+develop/
+*.vsix
+example/
+.vscode/

@@ -11,6 +11,12 @@
 		"description": "add",
 		"scope": "source.riscv"
 	},
+	"and": {
+		"prefix": "and",
+		"body": "and ${1:t0}, ${2:t1}, ${3:t2} # $1 = $2 & $3\n",
+		"description": "and",
+		"scope": "source.riscv"
+	},
 	"beq": {
 		"prefix": "beq",
 		"body": "beq ${1:t0}, ${2:t1}, ${3:target} # if $1 == $2 then $3\n",
@@ -95,6 +101,18 @@
 		"description": "move",
 		"scope": "source.riscv"
 	},
+	"not": {
+		"prefix": "not",
+		"body": "not ${1:t0}, ${2:t1} # $1 = ! $2 \n",
+		"description": "not",
+		"scope": "source.riscv"
+	},
+	"or": {
+		"prefix": "or",
+		"body": "or ${1:t0}, ${2:t1}, ${3:t2} # $1 = $2 | $3\n",
+		"description": "or",
+		"scope": "source.riscv"
+	},
 	"sb": {
 		"prefix": "sb",
 		"body": "sb ${1:t1}, ${2:${3:0}(${4:s1})} # \n",
@@ -123,6 +141,12 @@
 		"prefix": "var",
 		"body": "${1:var}: .${2:word} $3",
 		"description": "variable",
+		"scope": "source.riscv"
+	},
+	"xor": {
+		"prefix": "xor",
+		"body": "xor ${1:t0}, ${2:t1}, ${3:t2} # $1 = $2 ^ $3\n",
+		"description": "xor",
 		"scope": "source.riscv"
 	}
 }

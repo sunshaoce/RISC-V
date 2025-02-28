@@ -1,19 +1,19 @@
 {
 	"addi": {
 		"prefix": "addi",
-		"body": "addi ${1:t0}, ${2:t1}, ${3:imm}; # $1 = $2 + $3\n",
+		"body": "addi ${1:t0}, ${2:t1}, ${3:imm} # $1 = $2 + $3\n",
 		"description": "add immediate",
 		"scope": "source.riscv"
 	},
 	"add": {
 		"prefix": "add",
-		"body": "add ${1:t0}, ${2:t1}, ${3:t2}; # $1 = $2 + $3\n",
+		"body": "add ${1:t0}, ${2:t1}, ${3:t2} # $1 = $2 + $3\n",
 		"description": "add",
 		"scope": "source.riscv"
 	},
 	"beq": {
 		"prefix": "beq",
-		"body": "beq ${1:t0}, ${2:t1}, ${3:target}; # if $1 == $2 then $3\n",
+		"body": "beq ${1:t0}, ${2:t1}, ${3:target} # if $1 == $2 then $3\n",
 		"description": "branch if equal",
 		"scope": "source.riscv"
 	},

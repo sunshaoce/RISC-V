@@ -893,6 +893,20 @@
         <string>support.function.riscv.zvksh</string>
       </dict>
 
+      <!-- zvqdotq instructions -->
+      <dict>
+        <key>comment</key>
+        <string>zvqdotq extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          vqdotsu\.v[vx] |
+          vqdotu?\.v[vx] |
+          vqdotus\.vx
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zvqdotq</string>
+      </dict>
+
       <!-- asm type -->
       <dict>
         <key>match</key>

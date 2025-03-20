@@ -168,6 +168,7 @@ This VSCode extension provides basic RISC-V colorization and snippets support. A
 1. `Zvl64b` Extension, version 1.0
 1. `Zvl65536b` Extension, version 1.0
 1. `Zvl8192b` Extension, version 1.0
+1. `Zvqdotq` Extension, version 0.0
 
 
 ## Waiting Supported Vendor Extensions

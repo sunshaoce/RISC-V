@@ -26,12 +26,14 @@ This VSCode extension provides basic RISC-V colorization and snippets support. A
 1. `Sha` Extension, version 1.0
 1. `Shcounterenw` Extension, version 1.0
 1. `Shgatpa` Extension, version 1.0
+1. `Shlcofideleg` Extension, version 1.0
 1. `Shtvala` Extension, version 1.0
 1. `Shvsatpa` Extension, version 1.0
 1. `Shvstvala` Extension, version 1.0
 1. `Shvstvecd` Extension, version 1.0
 1. `Smaia` Extension, version 1.0
 1. `Smcdeleg` Extension, version 1.0
+1. `Smcntrpmf` Extension, version 1.0
 1. `Smcsrind` Extension, version 1.0
 1. `Smctr` Extension, version 1.0
 1. `Smdbltrp` Extension, version 1.0
@@ -88,6 +90,7 @@ This VSCode extension provides basic RISC-V colorization and snippets support. A
 1. `Zcd` Extension, version 1.0
 1. `Zce` Extension, version 1.0
 1. `Zcf` Extension, version 1.0
+1. `Zclsd` Extension, version 1.0
 1. `Zcmop` Extension, version 1.0
 1. `Zcmp` Extension, version 1.0
 1. `Zcmt` Extension, version 1.0
@@ -104,6 +107,7 @@ This VSCode extension provides basic RISC-V colorization and snippets support. A
 1. `Zicbop` Extension, version 1.0
 1. `Zicboz` Extension, version 1.0
 1. `Ziccamoa` Extension, version 1.0
+1. `Ziccamoc` Extension, version 1.0
 1. `Ziccif` Extension, version 1.0
 1. `Zicclsm` Extension, version 1.0
 1. `Ziccrse` Extension, version 1.0
@@ -116,6 +120,7 @@ This VSCode extension provides basic RISC-V colorization and snippets support. A
 1. `Zihintntl` Extension, version 1.0
 1. `Zihintpause` Extension, version 2.0
 1. `Zihpm` Extension, version 2.0
+1. `Zilsd` Extension, version 1.0
 1. `Zimop` Extension, version 1.0
 1. `Zk` Extension, version 1.0
 1. `Zkn` Extension, version 1.0
@@ -170,8 +175,14 @@ This VSCode extension provides basic RISC-V colorization and snippets support. A
 1. `Zvl8192b` Extension, version 1.0
 1. `Zvqdotq` Extension, version 0.0
 
+## Waiting Supported Extensions
+1. `P` Extension, version 0.14
+
 
 ## Waiting Supported Vendor Extensions
+1. `Xandesperf` Extension, version 5.0
+1. `Xandesvdot` Extension, version 5.0
+1. `Xandesvpackfph` Extension, version 5.0
 1. `Xcvalu` Extension, version 1.0
 1. `Xcvbi` Extension, version 1.0
 1. `Xcvbitmanip` Extension, version 1.0
@@ -179,18 +190,49 @@ This VSCode extension provides basic RISC-V colorization and snippets support. A
 1. `Xcvmac` Extension, version 1.0
 1. `Xcvmem` Extension, version 1.0
 1. `Xcvsimd` Extension, version 1.0
-1. `Xqcia` Extension, version 0.2
+1. `Xepi` Extension, version 1.0
+1. `Xmipscmov` Extension, version 1.0
+1. `Xmipslsp` Extension, version 1.0
+1. `Xqccmp` Extension, version 0.1
+1. `Xqcia` Extension, version 0.7
+1. `Xqciac` Extension, version 0.3
+1. `Xqcibi` Extension, version 0.2
+1. `Xqcibm` Extension, version 0.8
+1. `Xqcicli` Extension, version 0.3
+1. `Xqcicm` Extension, version 0.2
 1. `Xqcics` Extension, version 0.2
-1. `Xqcicsr` Extension, version 0.2
-1. `Xqcilsm` Extension, version 0.2
+1. `Xqcicsr` Extension, version 0.3
+1. `Xqciint` Extension, version 0.7
+1. `Xqciio` Extension, version 0.1
+1. `Xqcilb` Extension, version 0.2
+1. `Xqcili` Extension, version 0.2
+1. `Xqcilia` Extension, version 0.2
+1. `Xqcilo` Extension, version 0.3
+1. `Xqcilsm` Extension, version 0.5
+1. `Xqcisim` Extension, version 0.2
 1. `Xqcisls` Extension, version 0.2
+1. `Xqcisync` Extension, version 0.3
+1. `Xrivosvisni` Extension, version 0.1
+1. `Xrivosvizip` Extension, version 0.1
 1. `Xsfcease` Extension, version 1.0
+1. `Xsfmclic` Extension, version 0.1
+1. `Xsfmm128t` Extension, version 0.6
+1. `Xsfmm16t` Extension, version 0.6
+1. `Xsfmm32a16f` Extension, version 0.6
+1. `Xsfmm32a32f` Extension, version 0.6
+1. `Xsfmm32a8f` Extension, version 0.6
+1. `Xsfmm32a8i` Extension, version 0.6
+1. `Xsfmm32t` Extension, version 0.6
+1. `Xsfmm64a64f` Extension, version 0.6
+1. `Xsfmm64t` Extension, version 0.6
+1. `Xsfmmbase` Extension, version 0.6
+1. `Xsfsclic` Extension, version 0.1
 1. `Xsfvcp` Extension, version 1.0
 1. `Xsfvfnrclipxfqf` Extension, version 1.0
 1. `Xsfvfwmaccqqq` Extension, version 1.0
 1. `Xsfvqmaccdod` Extension, version 1.0
 1. `Xsfvqmaccqoq` Extension, version 1.0
-1. `Xsifivecdiscarddlone` Extension, version .0
+1. `Xsifivecdiscarddlone` Extension, version 1.0
 1. `Xsifivecflushdlone` Extension, version 1.0
 1. `Xtheadba` Extension, version 1.0
 1. `Xtheadbb` Extension, version 1.0

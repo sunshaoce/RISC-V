@@ -227,6 +227,7 @@
           fcvt\.[dhqs]\.lu? |
           fcvt\.[dhqs]\.wu? |
           fcvt\.[dqs]\.h |
+          fcvt\.[ds]\.q |
           fcvt\.[hqs]\.d |
           fcvt\.lu?\.[dhqs] |
           fcvt\.wu?\.[dhqs] |
@@ -554,16 +555,16 @@
         <key>match</key>
         <string>(?ix)\b(
           fcvtmod\.w\.d |
-          fgeq\.[dhs] |
-          fgtq\.[dhs] |
-          fleq\.[dhs] |
-          fli\.[dhs] |
-          fltq\.[dhs] |
-          fmaxm\.[dhs] |
-          fminm\.[dhs] |
+          fgeq\.[dhqs] |
+          fgtq\.[dhqs] |
+          fleq\.[dhqs] |
+          fli\.[dhqs] |
+          fltq\.[dhqs] |
+          fmaxm\.[dhqs] |
+          fminm\.[dhqs] |
           fmvh\.x\.d |
           fmvp\.d\.x |
-          fround(nx)?\.[dhs]
+          fround(nx)?\.[dhqs]
           )\b</string>
         <key>name</key>
         <string>support.function.riscv.zfa</string>
@@ -710,6 +711,8 @@
         <string>zkne extension</string>
         <key>match</key>
         <string>(?ix)\b(
+          aes32esi |
+          aes32esmi |
           aes64esm? |
           aes64ks1i |
           aes64ks2

@@ -1048,6 +1048,10 @@
           pcrel_lo |
           tls_gd_pcrel_hi |
           tls_ie_pcrel_hi |
+          tlsdesc_add_lo |
+          tlsdesc_call |
+          tlsdesc_hi |
+          tlsdesc_load_lo |
           tprel_add |
           tprel_hi |
           tprel_lo

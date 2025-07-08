@@ -485,7 +485,8 @@
           pslli\.[bhw] |
           psslai\.[hw] |
           rev16 |
-          rev8?
+          rev8? |
+          sslai
           )\b</string>
         <key>name</key>
         <string>support.function.riscv.q</string>
@@ -748,6 +749,8 @@
         <string>zknh extension</string>
         <key>match</key>
         <string>(?ix)\b(
+          sha256sig[01] |
+          sha256sum[01] |
           sha512sig[01][hl]? |
           sha512sum[01]r?
           )\b</string>

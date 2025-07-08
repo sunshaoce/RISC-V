@@ -469,6 +469,27 @@
         <string>support.function.riscv.zacas</string>
       </dict>
 
+      <!-- q instructions -->
+      <dict>
+        <key>comment</key>
+        <string>q extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          absw? |
+          clsw? |
+          pli\.[bhw] |
+          plui\.[hw] |
+          psabs\.[bh] |
+          psext\.h\.b |
+          psext\.w\.[bh] |
+          pslli\.[bhw] |
+          psslai\.[hw] |
+          rev16 |
+          rev8?
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.q</string>
+      </dict>
 
       <!-- zawrs instructions -->
       <dict>

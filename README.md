@@ -20,6 +20,7 @@ This VSCode extension provides basic RISC-V colorization and snippets support. A
 1. `H` Hypervisor Extension, version 1.0
 1. `I` (`RV32I` / `RV64I` / `RV128I`) Integer Extension, version 2.1
 1. `M` Multiplication Extension, version 2.0
+1. `P` Extension, version 0.14
 1. `Q` Quard-Precision Extension
 1. `Sdext` Extension, version 1.0
 1. `Sdtrig` Extension, version 1.0
@@ -174,9 +175,6 @@ This VSCode extension provides basic RISC-V colorization and snippets support. A
 1. `Zvl65536b` Extension, version 1.0
 1. `Zvl8192b` Extension, version 1.0
 1. `Zvqdotq` Extension, version 0.0
-
-## Waiting Supported Extensions
-1. `P` Extension, version 0.14
 
 
 ## Waiting Supported Vendor Extensions

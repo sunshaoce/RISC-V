@@ -1004,7 +1004,7 @@
           global |
           globl |
           ident |
-          insn[ ](b|ca|cb|ci|ciw|cj|cl|cr|cs|css|i|j|q|r|r4|s|sb|u|uj) |
+          insn[ ](b|ca|cb|ci|ciw|cj|cl|cr|cs|css|i|j|q|r|r4|s|sb|u|uj)? |
           loc |
           local |
           macro |

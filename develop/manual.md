@@ -3,6 +3,7 @@ https://stackoverflow.com/questions/73673804/npm-show-npm-elf-not-found-error-in
 
 ## install vsce
 ./develop/install.sh
+source ~/.bashrc
 nvm install node
 npm install -g @vscode/vsce
 

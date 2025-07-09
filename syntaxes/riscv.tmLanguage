@@ -659,6 +659,8 @@
         <string>zicfiss extension</string>
         <key>match</key>
         <string>(?ix)\b(
+          c\.sspopchk |
+          c\.sspush |
           ssamoswap.[dw](.(aq)?(rl)?)? |
           sspopchk |
           sspush |

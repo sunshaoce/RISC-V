@@ -1,55 +1,59 @@
 {
-    "name": "RISC-V",
-    "displayName": "RISC-V",
-    "description": "Most Comprehensive RISC-V ASM Highlighting",
-    "version": "1.165.5",
-    "publisher": "sunshaoce",
-    "homepage": "https://github.com/sunshaoce/RISC-V.git",
-    "icon": "images/icon.png",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/sunshaoce/RISC-V.git"
-    },
-    "bugs": {
-        "url": "https://github.com/sunshaoce/RISC-V.git",
-        "email": "sunshaoce@gmail.com"
-    },
-    "engines": {
-        "vscode": "^1.5.0"
-    },
-    "categories": [
-        "Programming Languages",
-        "Snippets"
+  "name": "RISC-V",
+  "displayName": "RISC-V",
+  "description": "Most Comprehensive RISC-V ASM Highlighting",
+  "version": "1.165.11",
+  "publisher": "sunshaoce",
+  "homepage": "https://github.com/sunshaoce/RISC-V",
+  "icon": "images/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sunshaoce/RISC-V"
+  },
+  "bugs": {
+    "url": "https://github.com/sunshaoce/RISC-V/issues",
+    "email": "sunshaoce@outlook.com"
+  },
+  "engines": {
+    "vscode": "^1.50.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets"
+  ],
+  "main": "hover/extension.js",
+  "activationEvents": [
+    "onLanguage:riscv"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "riscv",
+        "aliases": [
+          "RISC-V",
+          "riscv"
+        ],
+        "extensions": [
+          ".S",
+          ".s",
+          ".riscv",
+          ".asm"
+        ],
+        "configuration": "./language-configuration.json"
+      }
     ],
-    "contributes": {
-        "languages": [
-            {
-                "id": "riscv",
-                "aliases": [
-                    "RISC-V",
-                    "riscv"
-                ],
-                "extensions": [
-                    ".S",
-                    ".s",
-                    ".riscv",
-                    ".asm"
-                ],
-                "configuration": "./language-configuration.json"
-            }
-        ],
-        "grammars": [
-            {
-                "language": "riscv",
-                "scopeName": "source.riscv",
-                "path": "./syntaxes/riscv.tmLanguage"
-            }
-        ],
-        "snippets": [
-            {
-                "language": "riscv",
-                "path": "./snippets/snippets.json"
-            }
-        ]
-    }
+    "grammars": [
+      {
+        "language": "riscv",
+        "scopeName": "source.riscv",
+        "path": "./syntaxes/riscv.tmLanguage"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "riscv",
+        "path": "./snippets/snippets.json"
+      }
+    ]
+  }
 }

@@ -99,6 +99,56 @@ function activate(context) {
 
   // Push the HoverProvider into the extension context subscriptions
   context.subscriptions.push(hoverProvider);
+
+  // Language switching lets us toggle vendor-specific highlighting by setting the document language.
+  const baseLanguageId = 'riscv';
+  const vendorLanguageMap = {
+    spacemit: 'riscv-spacemit',
+    sifive: 'riscv-sifive'
+  };
+
+  // Apply the selected vendor language to a document if it is a RISC-V file.
+  const updateDocumentLanguage = (document) => {
+    const vendorLanguageIds = Object.values(vendorLanguageMap);
+    if (document.languageId !== baseLanguageId && !vendorLanguageIds.includes(document.languageId)) {
+      return;
+    }
+    // Read the vendor selection (single-choice) and map it to a language id.
+    const vendor = vscode.workspace
+      .getConfiguration('riscv')
+      .get('vendor', '');
+    const targetLanguageId = vendorLanguageMap[vendor] || baseLanguageId;
+    // Only switch when needed to avoid unnecessary re-tokenization.
+    if (document.languageId !== targetLanguageId) {
+      vscode.languages.setTextDocumentLanguage(document, targetLanguageId);
+    }
+  };
+
+  // Update all open documents when the extension activates.
+  const updateAllOpenDocuments = () => {
+    for (const document of vscode.workspace.textDocuments) {
+      updateDocumentLanguage(document);
+    }
+  };
+
+  updateAllOpenDocuments();
+
+  context.subscriptions.push(
+    vscode.workspace.onDidOpenTextDocument((document) => {
+      // Ensure newly opened documents use the selected vendor language.
+      updateDocumentLanguage(document);
+    })
+  );
+
+  context.subscriptions.push(
+    vscode.workspace.onDidChangeConfiguration((event) => {
+      // Re-apply language when the vendor selection changes.
+      if (!event.affectsConfiguration('riscv.vendor')) {
+        return;
+      }
+      updateAllOpenDocuments();
+    })
+  );
 }
 
 function deactivate() { }

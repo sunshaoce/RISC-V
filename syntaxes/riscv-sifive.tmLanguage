@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>name</key>
+    <string>RISC-V Assembler (sifive)</string>
+    <key>scopeName</key>
+    <string>source.riscv.sifive</string>
+    <key>patterns</key>
+    <array>
+      <dict>
+        <key>include</key>
+        <string>source.riscv</string>
+      </dict>
+
+      <!-- sifive xsfvfexp instructions -->
+      <dict>
+        <key>comment</key>
+        <string>sifive xsfvfexp extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          sf\.vfexp\.v
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.sifive.xsfvfexp</string>
+      </dict>
+    </array>
+  </dict>
+</plist>

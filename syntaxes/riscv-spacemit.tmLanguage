@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>name</key>
+    <string>RISC-V Assembler (spacemit)</string>
+    <key>scopeName</key>
+    <string>source.riscv.spacemit</string>
+    <key>patterns</key>
+    <array>
+      <dict>
+        <key>include</key>
+        <string>source.riscv</string>
+      </dict>
+
+      <!-- spacemit xsmtvdot instructions -->
+      <dict>
+        <key>comment</key>
+        <string>xsmtvdot extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          smt\.vmadot[123]?(u|su|us)?
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.xsmtvdot</string>
+      </dict>
+    </array>
+  </dict>
+</plist>

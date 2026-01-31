@@ -176,6 +176,9 @@ This VSCode extension provides basic RISC-V colorization and snippets support. A
 1. `Zvl8192b` Extension, version 1.0
 1. `Zvqdotq` Extension, version 0.0
 
+## Supported Vendor Extensions
+1. `Xsfvcp` Extension, version 1.0
+1. `Xsmtvdot` Extension, version 1.0
 
 ## Waiting Supported Vendor Extensions
 1. `Xandesperf` Extension, version 5.0
@@ -225,7 +228,6 @@ This VSCode extension provides basic RISC-V colorization and snippets support. A
 1. `Xsfmm64t` Extension, version 0.6
 1. `Xsfmmbase` Extension, version 0.6
 1. `Xsfsclic` Extension, version 0.1
-1. `Xsfvcp` Extension, version 1.0
 1. `Xsfvfnrclipxfqf` Extension, version 1.0
 1. `Xsfvfwmaccqqq` Extension, version 1.0
 1. `Xsfvqmaccdod` Extension, version 1.0

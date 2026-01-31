@@ -2,7 +2,7 @@
   "name": "RISC-V",
   "displayName": "RISC-V",
   "description": "Most Comprehensive RISC-V ASM Highlighting",
-  "version": "1.165.11",
+  "version": "1.165.20",
   "publisher": "sunshaoce",
   "homepage": "https://github.com/sunshaoce/RISC-V",
   "icon": "images/icon.png",
@@ -26,6 +26,26 @@
     "onLanguage:riscv"
   ],
   "contributes": {
+    "configuration": {
+      "title": "RISC-V",
+      "properties": {
+        "riscv.vendor": {
+          "type": "string",
+          "default": "",
+          "enum": [
+            "",
+            "spacemit",
+            "sifive"
+          ],
+          "description": "Select a vendor extension set to highlight. Valid values: (none), spacemit, sifive.",
+          "enumDescriptions": [
+            "None (no vendor extension highlighting)",
+            "SpacemiT vendor extensions (e.g., xsmtvdot)",
+            "SiFive vendor extensions (e.g., xsfvfexp)"
+          ]
+        }
+      }
+    },
     "languages": [
       {
         "id": "riscv",
@@ -40,6 +60,20 @@
           ".asm"
         ],
         "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "riscv-spacemit",
+        "aliases": [
+          "RISC-V (spacemit)"
+        ],
+        "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "riscv-sifive",
+        "aliases": [
+          "RISC-V (sifive)"
+        ],
+        "configuration": "./language-configuration.json"
       }
     ],
     "grammars": [
@@ -47,6 +81,16 @@
         "language": "riscv",
         "scopeName": "source.riscv",
         "path": "./syntaxes/riscv.tmLanguage"
+      },
+      {
+        "language": "riscv-spacemit",
+        "scopeName": "source.riscv.spacemit",
+        "path": "./syntaxes/riscv-spacemit.tmLanguage"
+      },
+      {
+        "language": "riscv-sifive",
+        "scopeName": "source.riscv.sifive",
+        "path": "./syntaxes/riscv-sifive.tmLanguage"
       }
     ],
     "snippets": [

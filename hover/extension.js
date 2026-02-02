@@ -81,7 +81,7 @@ function activate(context) {
       if (!desc) return;
 
       const markdown = new vscode.MarkdownString();
-      markdown.appendCodeblock(word, "riscv");
+      markdown.appendCodeblock(word, document.languageId);
       markdown.appendMarkdown(desc);
       return new vscode.Hover(markdown, range);
     },

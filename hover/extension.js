@@ -1,4 +1,4 @@
-const vscode = require('vscode');
+const vscode = require("vscode");
 
 // =============================================================================
 // Vendor Configuration
@@ -9,13 +9,13 @@ const vscode = require('vscode');
 // =============================================================================
 const vendors = {
   spacemit: {
-    languageId: 'riscv-spacemit',
-    instructions: './instructions-spacemit.json'
+    languageId: "riscv-spacemit",
+    instructions: "./instructions-spacemit.json",
   },
   sifive: {
-    languageId: 'riscv-sifive',
-    instructions: './instructions-sifive.json'
-  }
+    languageId: "riscv-sifive",
+    instructions: "./instructions-sifive.json",
+  },
 };
 
 // =============================================================================
@@ -24,29 +24,34 @@ const vendors = {
 
 /** Filter out comment keys (starting with '//') from JSON objects */
 const filterComments = (obj) =>
-  Object.fromEntries(Object.entries(obj).filter(([key]) => !key.startsWith('//')));
+  Object.fromEntries(
+    Object.entries(obj).filter(([key]) => !key.startsWith("//")),
+  );
 
 /** Base RISC-V instruction descriptions (always loaded) */
-const baseDescriptions = filterComments(require('./instructions.json'));
+const baseDescriptions = filterComments(require("./instructions.json"));
 
 /** Vendor-specific instruction descriptions (keyed by languageId) */
 const vendorDescriptions = Object.fromEntries(
   Object.entries(vendors)
     .filter(([, cfg]) => cfg.instructions)
-    .map(([, cfg]) => [cfg.languageId, filterComments(require(cfg.instructions))])
+    .map(([, cfg]) => [
+      cfg.languageId,
+      filterComments(require(cfg.instructions)),
+    ]),
 );
 
 /** Get merged instruction descriptions for a given language ID */
 const getDescriptions = (languageId) => ({
   ...baseDescriptions,
-  ...(vendorDescriptions[languageId] || {})
+  ...(vendorDescriptions[languageId] || {}),
 });
 
 // =============================================================================
 // Language Configuration
 // =============================================================================
 
-const baseLanguageId = 'riscv';
+const baseLanguageId = "riscv";
 const vendorLanguageIds = Object.values(vendors).map((v) => v.languageId);
 const allLanguageIds = [baseLanguageId, ...vendorLanguageIds];
 
@@ -58,11 +63,17 @@ function activate(context) {
   // ---------------------------------------------------------------------------
   // Hover Provider: Show instruction descriptions on hover
   // ---------------------------------------------------------------------------
-  const selectors = allLanguageIds.map((lang) => ({ language: lang, scheme: 'file' }));
+  const selectors = allLanguageIds.map((lang) => ({
+    language: lang,
+    scheme: "file",
+  }));
 
   const hoverProvider = vscode.languages.registerHoverProvider(selectors, {
     provideHover(document, position) {
-      const range = document.getWordRangeAtPosition(position, /[a-zA-Z.][a-zA-Z0-9._]*/);
+      const range = document.getWordRangeAtPosition(
+        position,
+        /[a-zA-Z.][a-zA-Z0-9._]*/,
+      );
       if (!range) return;
 
       const word = document.getText(range).toLowerCase();
@@ -70,10 +81,10 @@ function activate(context) {
       if (!desc) return;
 
       const markdown = new vscode.MarkdownString();
-      markdown.appendCodeblock(word, 'riscv');
+      markdown.appendCodeblock(word, "riscv");
       markdown.appendMarkdown(desc);
       return new vscode.Hover(markdown, range);
-    }
+    },
   });
 
   context.subscriptions.push(hoverProvider);
@@ -86,7 +97,7 @@ function activate(context) {
   const updateDocumentLanguage = (document) => {
     if (!allLanguageIds.includes(document.languageId)) return;
 
-    const vendor = vscode.workspace.getConfiguration('riscv').get('vendor', '');
+    const vendor = vscode.workspace.getConfiguration("riscv").get("vendor", "");
     const targetLanguageId = vendors[vendor]?.languageId || baseLanguageId;
 
     if (document.languageId !== targetLanguageId) {
@@ -104,16 +115,16 @@ function activate(context) {
 
   // Apply language when new documents are opened
   context.subscriptions.push(
-    vscode.workspace.onDidOpenTextDocument(updateDocumentLanguage)
+    vscode.workspace.onDidOpenTextDocument(updateDocumentLanguage),
   );
 
   // Re-apply language when vendor setting changes
   context.subscriptions.push(
     vscode.workspace.onDidChangeConfiguration((event) => {
-      if (event.affectsConfiguration('riscv.vendor')) {
+      if (event.affectsConfiguration("riscv.vendor")) {
         updateAllOpenDocuments();
       }
-    })
+    }),
   );
 }
 

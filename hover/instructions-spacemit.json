@@ -1,0 +1,36 @@
+{
+  "//SpacemiT IME": "=== SpacemiT IME (Matrix Extension) ===",
+  "smt.vmadot": "Vector Matrix Dot-product (signed × signed). Performs matrix multiply-accumulate on int4/int8/int16 inputs.\n\n`C[i,j] += Σ(A[i,k] × B[k,j])`",
+  "smt.vmadotu": "Vector Matrix Dot-product (unsigned × unsigned). Performs matrix multiply-accumulate on uint4/uint8/uint16 inputs.\n\n`C[i,j] += Σ(A[i,k] × B[k,j])`",
+  "smt.vmadotsu": "Vector Matrix Dot-product (signed × unsigned). Performs matrix multiply-accumulate with signed A and unsigned B.\n\n`C[i,j] += Σ(A[i,k] × B[k,j])`",
+  "smt.vmadotus": "Vector Matrix Dot-product (unsigned × signed). Performs matrix multiply-accumulate with unsigned A and signed B.\n\n`C[i,j] += Σ(A[i,k] × B[k,j])`",
+  "smt.vfmadot": "Vector Float Matrix Dot-product. Performs matrix multiply-accumulate on fp4/fp8/fp16/bfp16 inputs.\n\n`C[i,j] += Σ(A[i,k] × B[k,j])`",
+
+  "//SpacemiT IME slide-1": "=== SpacemiT IME Sliding-window (slide=1) ===",
+  "smt.vmadot1": "Vector Matrix Dot-product with slide=1 (signed × signed). Selects input A from vs1/vs1+1 with 1-row offset.\n\n`C[i,j] += Σ(A[slide+i,k] × B[k,j])`",
+  "smt.vmadot1u": "Vector Matrix Dot-product with slide=1 (unsigned × unsigned).\n\n`C[i,j] += Σ(A[slide+i,k] × B[k,j])`",
+  "smt.vmadot1su": "Vector Matrix Dot-product with slide=1 (signed × unsigned).\n\n`C[i,j] += Σ(A[slide+i,k] × B[k,j])`",
+  "smt.vmadot1us": "Vector Matrix Dot-product with slide=1 (unsigned × signed).\n\n`C[i,j] += Σ(A[slide+i,k] × B[k,j])`",
+  "smt.vfmadot1": "Vector Float Matrix Dot-product with slide=1.\n\n`C[i,j] += Σ(A[slide+i,k] × B[k,j])`",
+
+  "//SpacemiT IME slide-2": "=== SpacemiT IME Sliding-window (slide=2) ===",
+  "smt.vmadot2": "Vector Matrix Dot-product with slide=2 (signed × signed). Selects input A from vs1/vs1+1 with 2-row offset.\n\n`C[i,j] += Σ(A[slide+i,k] × B[k,j])`",
+  "smt.vmadot2u": "Vector Matrix Dot-product with slide=2 (unsigned × unsigned).\n\n`C[i,j] += Σ(A[slide+i,k] × B[k,j])`",
+  "smt.vmadot2su": "Vector Matrix Dot-product with slide=2 (signed × unsigned).\n\n`C[i,j] += Σ(A[slide+i,k] × B[k,j])`",
+  "smt.vmadot2us": "Vector Matrix Dot-product with slide=2 (unsigned × signed).\n\n`C[i,j] += Σ(A[slide+i,k] × B[k,j])`",
+  "smt.vfmadot2": "Vector Float Matrix Dot-product with slide=2.\n\n`C[i,j] += Σ(A[slide+i,k] × B[k,j])`",
+
+  "//SpacemiT IME slide-3": "=== SpacemiT IME Sliding-window (slide=3) ===",
+  "smt.vmadot3": "Vector Matrix Dot-product with slide=3 (signed × signed). Selects input A from vs1/vs1+1 with 3-row offset.\n\n`C[i,j] += Σ(A[slide+i,k] × B[k,j])`",
+  "smt.vmadot3u": "Vector Matrix Dot-product with slide=3 (unsigned × unsigned).\n\n`C[i,j] += Σ(A[slide+i,k] × B[k,j])`",
+  "smt.vmadot3su": "Vector Matrix Dot-product with slide=3 (signed × unsigned).\n\n`C[i,j] += Σ(A[slide+i,k] × B[k,j])`",
+  "smt.vmadot3us": "Vector Matrix Dot-product with slide=3 (unsigned × signed).\n\n`C[i,j] += Σ(A[slide+i,k] × B[k,j])`",
+  "smt.vfmadot3": "Vector Float Matrix Dot-product with slide=3.\n\n`C[i,j] += Σ(A[slide+i,k] × B[k,j])`",
+
+  "//SpacemiT IME slide-n": "=== SpacemiT IME Sliding-window (slide=n) ===",
+  "smt.vmadotn": "Vector Matrix Dot-product with slide=n (signed × signed). Slide value from t0 register.\n\n`C[i,j] += Σ(A[slide+i,k] × B[k,j])`",
+  "smt.vmadotnu": "Vector Matrix Dot-product with slide=n (unsigned × unsigned). Slide value from t0 register.\n\n`C[i,j] += Σ(A[slide+i,k] × B[k,j])`",
+  "smt.vmadotnsu": "Vector Matrix Dot-product with slide=n (signed × unsigned). Slide value from t0 register.\n\n`C[i,j] += Σ(A[slide+i,k] × B[k,j])`",
+  "smt.vmadotnus": "Vector Matrix Dot-product with slide=n (unsigned × signed). Slide value from t0 register.\n\n`C[i,j] += Σ(A[slide+i,k] × B[k,j])`",
+  "smt.vfmadotn": "Vector Float Matrix Dot-product with slide=n. Slide value from t0 register.\n\n`C[i,j] += Σ(A[slide+i,k] × B[k,j])`"
+}

@@ -67,7 +67,6 @@
           jump |
           l[abhw]u? |
           l[lg]a |
-          lbu? |
           ld |
           li |
           lui |
@@ -112,22 +111,18 @@
           dret |
           ebreak |
           ecall |
-          hfence.gvma |
-          hfence.vvma |
-          hinval.gvma |
-          hinval.vvma |
+          hfence\.gvma |
+          hfence\.vvma |
+          hinval\.gvma |
+          hinval\.vvma |
           mnret |
           mret |
           sbreak |
           scall |
           sctrclr |
-          sfence.inval.ir |
-          sfence.vma |
-          sfence.w.inval |
           sfence\.inval\.ir |
           sfence\.vma |
           sfence\.w\.inval |
-          sinval.vma |
           sinval\.vma |
           sret |
           unimp |
@@ -389,8 +384,7 @@
           vmnot\.m |
           vmorn\.(mm|vv) |
           vmornot\.mm |
-          vms[ibo]f\.m |
-          vms[obi]f\.v |
+          vms[bio]f\.[mv] |
           vmseq\.v[ivx] |
           vmset\.m |
           vmsgeu?\.v[ivx] |
@@ -712,37 +706,21 @@
         <string>support.function.riscv.zimop</string>
       </dict>
 
-      <!-- zknd instructions -->
+      <!-- zknd/zkne instructions -->
       <dict>
         <key>comment</key>
-        <string>zknd extension</string>
+        <string>zknd/zkne extension (AES)</string>
         <key>match</key>
         <string>(?ix)\b(
-          aes32dsi |
-          aes32dsmi |
-          aes64dsm? |
+          aes32[de]si |
+          aes32[de]smi |
+          aes64[de]sm? |
           aes64im |
           aes64ks1i |
           aes64ks2
           )\b</string>
         <key>name</key>
-        <string>support.function.riscv.zknd</string>
-      </dict>
-
-      <!-- zkne instructions -->
-      <dict>
-        <key>comment</key>
-        <string>zkne extension</string>
-        <key>match</key>
-        <string>(?ix)\b(
-          aes32esi |
-          aes32esmi |
-          aes64esm? |
-          aes64ks1i |
-          aes64ks2
-          )\b</string>
-        <key>name</key>
-        <string>support.function.riscv.zkne</string>
+        <string>support.function.riscv.zkn</string>
       </dict>
 
       <!-- zknh instructions -->
@@ -1084,14 +1062,6 @@
 
       <!-- x/f register alias -->
       <dict>
-        <key>captures</key>
-        <dict>
-          <key>1</key>
-          <dict>
-            <key>name</key>
-            <string>punctuation.definition.variable.riscv</string>
-          </dict>
-        </dict>
         <key>match</key>
         <string>(?ix)\b(
           dyn |
@@ -1123,14 +1093,6 @@
 
       <!-- v register -->
       <dict>
-        <key>captures</key>
-        <dict>
-          <key>1</key>
-          <dict>
-            <key>name</key>
-            <string>punctuation.definition.variable.riscv</string>
-          </dict>
-        </dict>
         <key>match</key>
         <string>(?ix)\b(
           e(8|16|32|64) |
@@ -1149,14 +1111,6 @@
 
       <!-- csr register -->
       <dict>
-        <key>captures</key>
-        <dict>
-          <key>1</key>
-          <dict>
-            <key>name</key>
-            <string>punctuation.definition.variable.riscv</string>
-          </dict>
-        </dict>
         <key>match</key>
         <string>(?ix)\b(
           ([hmsu]|vs)ie |

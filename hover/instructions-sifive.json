@@ -1,0 +1,4 @@
+{
+  "//Xsfvfexp": "=== SiFive Xsfvfexp (Vector Floating-Point Exponential) ===",
+  "sf.vfexp.v": "Vector Floating-Point Exponential Function (Xsfvfexp32e/Xsfvfexp16e/Xsfvfbfexp16e).\n\nApproximates e^x for each element.\n\n`vd[i] ← exp(vs2[i])`\n\n**Accuracy:** ~22 bits (fp32), ~9 bits (fp16), ~7 bits (bf16)\n\n**Valid range:** (-64, 64) for fp32/bf16, (-8, 8) for fp16"
+}

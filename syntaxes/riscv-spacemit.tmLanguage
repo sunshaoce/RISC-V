@@ -13,13 +13,25 @@
         <string>source.riscv</string>
       </dict>
 
-      <!-- spacemit xsmtvdot instructions -->
+      <!-- spacemit IME integer instructions -->
       <dict>
         <key>comment</key>
-        <string>xsmtvdot extension</string>
+        <string>SpacemiT IME integer matrix multiply-accumulate</string>
         <key>match</key>
         <string>(?ix)\b(
-          smt\.vmadot[123]?(u|su|us)?
+          smt\.vmadot([123n])?(u|su|us)?
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.xsmtvdot</string>
+      </dict>
+
+      <!-- spacemit IME floating-point instructions -->
+      <dict>
+        <key>comment</key>
+        <string>SpacemiT IME floating-point matrix multiply-accumulate</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          smt\.vfmadot[123n]?
           )\b</string>
         <key>name</key>
         <string>support.function.riscv.xsmtvdot</string>

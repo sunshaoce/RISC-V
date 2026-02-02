@@ -1,159 +1,122 @@
 const vscode = require('vscode');
 
-// Instruction descriptions (can be extended or loaded from JSON)
-const instructionDescriptions = {
-  // U-type
-  'lui': 'Load upper immediate. Places the U-immediate value in the top 20 bits of the destination register, filling the lowest 12 bits with zeros.',
-  'auipc': 'Add upper immediate to PC. Forms a PC-relative address using U-type immediate, writes into rd.',
-
-  // I-type
-  'addi': 'Add immediate. Adds sign-extended 12-bit immediate to register rs1.',
-  'slti': 'Set less than immediate. Sets rd = 1 if rs1 < imm, else rd = 0.',
-  'sltiu': 'Set less than immediate unsigned. Sets rd = 1 if rs1 < imm (unsigned), else rd = 0.',
-  'xori': 'XOR immediate. rd = rs1 XOR imm.',
-  'ori': 'OR immediate. rd = rs1 OR imm.',
-  'andi': 'AND immediate. rd = rs1 AND imm.',
-  'slli': 'Shift left logical immediate. rd = rs1 << shamt.',
-  'srli': 'Shift right logical immediate. rd = rs1 >> shamt (logical).',
-  'srai': 'Shift right arithmetic immediate. rd = rs1 >> shamt (arithmetic).',
-  'jalr': 'Jump and link register. Indirect jump to address in register rs1 + immediate, writes return address to rd.',
-  'lb': 'Load byte from memory, sign-extended.',
-  'lh': 'Load halfword from memory, sign-extended.',
-  'lw': 'Load word from memory.',
-  'lbu': 'Load byte from memory, zero-extended.',
-  'lhu': 'Load halfword from memory, zero-extended.',
-
-  // S-type
-  'sb': 'Store byte to memory.',
-  'sh': 'Store halfword to memory.',
-  'sw': 'Store word to memory.',
-
-  // R-type
-  'add': 'Add. Integer register-register addition.',
-  'sub': 'Subtract. Integer register-register subtraction.',
-  'sll': 'Shift left logical. rd = rs1 << rs2.',
-  'slt': 'Set less than. rd = 1 if rs1 < rs2, else rd = 0.',
-  'sltu': 'Set less than unsigned. rd = 1 if rs1 < rs2 (unsigned), else rd = 0',
-  'xor': 'XOR. rd = rs1 XOR rs2.',
-  'srl': 'Shift right logical. rd = rs1 >> rs2 (logical).',
-  'sra': 'Shift right arithmetic. rd = rs1 >> rs2 (arithmetic).',
-  'or': 'OR. rd = rs1 OR rs2.',
-  'and': 'AND. rd = rs1 AND rs2.',
-
-  // B-type
-  'beq': 'Branch if equal. If rs1 == rs2, branch to target offset.',
-  'bne': 'Branch if not equal. If rs1 != rs2, branch to target offset.',
-  'blt': 'Branch if less than. If rs1 < rs2, branch to target offset.',
-  'bge': 'Branch if greater or equal. If rs1 >= rs2, branch to target offset.',
-  'bltu': 'Branch if less than unsigned. If rs1 < rs2 (unsigned), branch to target offset.',
-  'bgeu': 'Branch if greater or equal unsigned. If rs1 >= rs2 (unsigned), branch to target offset.',
-
-  // J-type
-  'jal': 'Jump and link. Jumps to target offset, writes return address to rd.',
-
-  // Fence and system
-  'fence': 'Memory fence. Ensures ordering of memory operations.',
-  'fence.i': 'Instruction fence. Synchronizes instruction stream.',
-  'ecall': 'Environment call. Used for system call.',
-  'ebreak': 'Environment break. Used for debugger breakpoint.'
+// =============================================================================
+// Vendor Configuration
+// =============================================================================
+// To add a new vendor, simply add a new entry here:
+//   - languageId:    Required. Must match the language ID in package.json
+//   - instructions:  Optional. Path to vendor-specific instruction descriptions
+// =============================================================================
+const vendors = {
+  spacemit: {
+    languageId: 'riscv-spacemit',
+    instructions: './instructions-spacemit.json'
+  },
+  sifive: {
+    languageId: 'riscv-sifive',
+    instructions: './instructions-sifive.json'
+  }
 };
 
+// =============================================================================
+// Instruction Descriptions
+// =============================================================================
+
+/** Filter out comment keys (starting with '//') from JSON objects */
+const filterComments = (obj) =>
+  Object.fromEntries(Object.entries(obj).filter(([key]) => !key.startsWith('//')));
+
+/** Base RISC-V instruction descriptions (always loaded) */
+const baseDescriptions = filterComments(require('./instructions.json'));
+
+/** Vendor-specific instruction descriptions (keyed by languageId) */
+const vendorDescriptions = Object.fromEntries(
+  Object.entries(vendors)
+    .filter(([, cfg]) => cfg.instructions)
+    .map(([, cfg]) => [cfg.languageId, filterComments(require(cfg.instructions))])
+);
+
+/** Get merged instruction descriptions for a given language ID */
+const getDescriptions = (languageId) => ({
+  ...baseDescriptions,
+  ...(vendorDescriptions[languageId] || {})
+});
+
+// =============================================================================
+// Language Configuration
+// =============================================================================
+
+const baseLanguageId = 'riscv';
+const vendorLanguageIds = Object.values(vendors).map((v) => v.languageId);
+const allLanguageIds = [baseLanguageId, ...vendorLanguageIds];
+
+// =============================================================================
+// Extension Activation
+// =============================================================================
 
 function activate(context) {
-  // Define a document selector that activates only for RISC-V files
-  const selector = { language: 'riscv', scheme: 'file' };
+  // ---------------------------------------------------------------------------
+  // Hover Provider: Show instruction descriptions on hover
+  // ---------------------------------------------------------------------------
+  const selectors = allLanguageIds.map((lang) => ({ language: lang, scheme: 'file' }));
 
-  // Register a HoverProvider to show information when hovering
-  const hoverProvider = vscode.languages.registerHoverProvider(selector, {
+  const hoverProvider = vscode.languages.registerHoverProvider(selectors, {
     provideHover(document, position) {
-      // Get the word range at the current cursor position
-      const range = document.getWordRangeAtPosition(
-        position,
-        /[a-zA-Z.][a-zA-Z0-9._]*/
-      );
-      if (!range) {
-        // Return undefined if no word is found
-        return undefined;
-      }
+      const range = document.getWordRangeAtPosition(position, /[a-zA-Z.][a-zA-Z0-9._]*/);
+      if (!range) return;
 
-      // Get the word text and convert to lowercase
       const word = document.getText(range).toLowerCase();
-      // Look up the instruction description
-      const desc = instructionDescriptions[word];
+      const desc = getDescriptions(document.languageId)[word];
+      if (!desc) return;
 
-      if (desc) {
-        // Create a MarkdownString object for hover content
-        const markdown = new vscode.MarkdownString();
-        // Make the instruction name bold
-        markdown.appendMarkdown(`**${word}**\n\n`);
-        // Append the instruction description
-        markdown.appendMarkdown(desc);
-        // Return a Hover object to display in VS Code
-        return new vscode.Hover(markdown, range);
-      }
-
-      // Return undefined if description not found
-      return undefined;
+      const markdown = new vscode.MarkdownString();
+      markdown.appendCodeblock(word, 'riscv');
+      markdown.appendMarkdown(desc);
+      return new vscode.Hover(markdown, range);
     }
   });
 
-  // Push the HoverProvider into the extension context subscriptions
   context.subscriptions.push(hoverProvider);
 
-  // Language switching lets us toggle vendor-specific highlighting by setting the document language.
-  const baseLanguageId = 'riscv';
-  const vendorLanguageMap = {
-    spacemit: 'riscv-spacemit',
-    sifive: 'riscv-sifive'
-  };
+  // ---------------------------------------------------------------------------
+  // Language Switching: Switch document language based on vendor setting
+  // ---------------------------------------------------------------------------
 
-  // Apply the selected vendor language to a document if it is a RISC-V file.
+  /** Update a single document's language based on the current vendor setting */
   const updateDocumentLanguage = (document) => {
-    const vendorLanguageIds = Object.values(vendorLanguageMap);
-    if (document.languageId !== baseLanguageId && !vendorLanguageIds.includes(document.languageId)) {
-      return;
-    }
-    // Read the vendor selection (single-choice) and map it to a language id.
-    const vendor = vscode.workspace
-      .getConfiguration('riscv')
-      .get('vendor', '');
-    const targetLanguageId = vendorLanguageMap[vendor] || baseLanguageId;
-    // Only switch when needed to avoid unnecessary re-tokenization.
+    if (!allLanguageIds.includes(document.languageId)) return;
+
+    const vendor = vscode.workspace.getConfiguration('riscv').get('vendor', '');
+    const targetLanguageId = vendors[vendor]?.languageId || baseLanguageId;
+
     if (document.languageId !== targetLanguageId) {
       vscode.languages.setTextDocumentLanguage(document, targetLanguageId);
     }
   };
 
-  // Update all open documents when the extension activates.
+  /** Update all open RISC-V documents */
   const updateAllOpenDocuments = () => {
-    for (const document of vscode.workspace.textDocuments) {
-      updateDocumentLanguage(document);
-    }
+    vscode.workspace.textDocuments.forEach(updateDocumentLanguage);
   };
 
+  // Apply language on activation
   updateAllOpenDocuments();
 
+  // Apply language when new documents are opened
   context.subscriptions.push(
-    vscode.workspace.onDidOpenTextDocument((document) => {
-      // Ensure newly opened documents use the selected vendor language.
-      updateDocumentLanguage(document);
-    })
+    vscode.workspace.onDidOpenTextDocument(updateDocumentLanguage)
   );
 
+  // Re-apply language when vendor setting changes
   context.subscriptions.push(
     vscode.workspace.onDidChangeConfiguration((event) => {
-      // Re-apply language when the vendor selection changes.
-      if (!event.affectsConfiguration('riscv.vendor')) {
-        return;
+      if (event.affectsConfiguration('riscv.vendor')) {
+        updateAllOpenDocuments();
       }
-      updateAllOpenDocuments();
     })
   );
 }
 
-function deactivate() { }
+function deactivate() {}
 
-module.exports = {
-  activate,
-  deactivate
-};
+module.exports = { activate, deactivate };

@@ -23,16 +23,14 @@
         <key>match</key>
         <string>(?ix)\b(
           (
-            amoadd\.[bdhw] |
-            amoand\.[bdhw] |
-            amomaxu?\.[bdhw] |
-            amominu?\.[bdhw] |
-            amoor\.[bdhw] |
-            amoswap\.[bdhw] |
-            amoxor\.[bdhw] |
-            l[bdhw] |
+            amoadd\.[dw] |
+            amoand\.[dw] |
+            amomaxu?\.[dw] |
+            amominu?\.[dw] |
+            amoor\.[dw] |
+            amoswap\.[dw] |
+            amoxor\.[dw] |
             lr\.[dw] |
-            s[bdhw] |
             sc\.[dw]
           )(\.(aq)?(rl)?)?
           )\b</string>
@@ -40,11 +38,154 @@
         <string>support.function.riscv.a</string>
       </dict>
 
-      <!-- i/zifencei instructions -->
+
+      <!-- zabha instructions -->
+
+      <dict>
+        <key>comment</key>
+        <string>Zabha extension (byte and halfword atomics)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          amoadd\.[bh] |
+          amoand\.[bh] |
+          amomaxu?\.[bh] |
+          amominu?\.[bh] |
+          amoor\.[bh] |
+          amoswap\.[bh] |
+          amoxor\.[bh]
+          )(\.(aq)?(rl)?)?
+          \b</string>
+        <key>name</key>
+        <string>support.function.riscv.zabha</string>
+      </dict>
+
+      <!-- zicsr instructions -->
+
+      <dict>
+        <key>comment</key>
+        <string>Zicsr extension (CSR instructions)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          csr[crsw] |
+          csrr?[csw]i?
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zicsr</string>
+      </dict>
+
+
+      <!-- zifencei instructions -->
+
+      <dict>
+        <key>comment</key>
+        <string>Zifencei extension (instruction-stream fence)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          fence\.i
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zifencei</string>
+      </dict>
+
+
+      <!-- zihintpause instructions -->
+
+      <dict>
+        <key>comment</key>
+        <string>Zihintpause extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          pause
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zihintpause</string>
+      </dict>
+
+
+      <!-- zicntr instructions -->
+
+      <dict>
+        <key>comment</key>
+        <string>Zicntr extension (counter and timer reads)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          rdcycleh? |
+          rdinstreth? |
+          rdtimeh?
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zicntr</string>
+      </dict>
+
+
+      <!-- ztso instructions -->
+
+      <dict>
+        <key>comment</key>
+        <string>Ztso extension</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          fence\.tso
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.ztso</string>
+      </dict>
+
+
+      <!-- zibi instructions -->
+
+      <dict>
+        <key>comment</key>
+        <string>Zibi extension (branch with immediate)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          beqi |
+          bnei
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zibi</string>
+      </dict>
+
+
+      <!-- zilx instructions -->
+
+      <dict>
+        <key>comment</key>
+        <string>Zilx extension (indexed scalar loads)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          lxb |
+          lxbu |
+          lxh |
+          lxw |
+          lxhu |
+          lxsb |
+          lxsh |
+          lxsw |
+          lxsbu |
+          lxshu |
+          lxd |
+          lxwu |
+          lxsd |
+          lxswu |
+          lxsuwb |
+          lxsuwbu |
+          lxsuwh |
+          lxsuwhu |
+          lxsuww |
+          lxsuwwu |
+          lxsuwd
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zilx</string>
+      </dict>
+
+
+      <!-- i instructions -->
       <dict>
         <key>match</key>
         <string>(?ix)\b(
-          add(\.uw)? |
+          add |
           addiw? |
           addw |
           andi? |
@@ -59,9 +200,7 @@
           bltu? |
           bnez? |
           call |
-          csr[crsw] |
-          csrr?[csw]i? |
-          fence(\.i|\.tso)? |
+          fence |
           jalr? |
           jr? |
           jump |
@@ -76,17 +215,13 @@
           nop |
           not |
           ori? |
-          pause |
-          rdcycleh? |
-          rdinstreth? |
-          rdtime |
           ret |
           s[bdhw] |
           seqz |
           sext\.w |
           sgtu? |
           sgtz |
-          slli(\.uw)? |
+          slli |
           slliw |
           sllw? |
           slti?u? |
@@ -211,7 +346,7 @@
       <!-- f/d/zfh/zfhmin/q/zfinx/zdinx/zhinx/zhinxmin instructions -->
       <dict>
         <key>comment</key>
-        <string>F extension (single precision floating point)</string>
+        <string>Floating-point family (F/D/Q/Zfh/Zfinx/Zdinx/Zhinx/Zhinxmin)</string>
         <key>match</key>
         <string>(?ix)\b(
           f[ls][dhqw] |
@@ -254,7 +389,7 @@
           fsub\.[dhqs]
           )\b</string>
         <key>name</key>
-        <string>support.function.riscv.f</string>
+        <string>support.function.riscv.floating-point</string>
       </dict>
 
       <!-- h instructions -->
@@ -457,16 +592,187 @@
         <string>zacas extension</string>
         <key>match</key>
         <string>(?ix)\b(
-          amocas\.[bdhqw]\.?(aq)?(rl)?
+          amocas\.[bdhqw](\.(aq)?(rl)?)?
           )\b</string>
         <key>name</key>
         <string>support.function.riscv.zacas</string>
       </dict>
 
-      <!-- q instructions -->
+
+      <!-- zvabd instructions -->
+
       <dict>
         <key>comment</key>
-        <string>q extension</string>
+        <string>Zvabd extension (vector absolute difference)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          vabs\.v |
+          vabd\.v[vx] |
+          vabdu\.v[vx] |
+          vwabda\.v[vx] |
+          vwabdau\.v[vx]
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zvabd</string>
+      </dict>
+
+
+      <!-- zvdot4a8i instructions -->
+
+      <dict>
+        <key>comment</key>
+        <string>Zvdot4a8i extension (4-element 8-bit dot product)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          vdot4a\.v[vx] |
+          vdot4au\.v[vx] |
+          vdot4asu\.v[vx] |
+          vdot4aus\.vx
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zvdot4a8i</string>
+      </dict>
+
+
+      <!-- zvdota instructions -->
+
+      <dict>
+        <key>comment</key>
+        <string>Zvdota family (vector dot product)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          vqwdotau\.vv |
+          vqwdotas\.vv |
+          vfwdota\.vv |
+          vfqwdota(\.alt)?\.vv
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zvdota</string>
+      </dict>
+
+
+      <!-- zvbdota instructions -->
+
+      <dict>
+        <key>comment</key>
+        <string>Zvbdota family (batched vector dot product)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          vqwbdotau\.vv |
+          vqwbdotas\.vv |
+          vfwbdota\.vv |
+          vfbdota\.vv |
+          vfqwbdota(\.alt)?\.vv
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zvbdota</string>
+      </dict>
+
+
+      <!-- zvfofp8min instructions -->
+
+      <dict>
+        <key>comment</key>
+        <string>Zvfofp8min extension (vector FP8 conversions)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          vfncvtbf16\.sat\.f\.f\.w |
+          vfncvt\.f\.f\.q |
+          vfncvt\.sat\.f\.f\.q
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zvfofp8min</string>
+      </dict>
+
+
+      <!-- zvzip instructions -->
+
+      <dict>
+        <key>comment</key>
+        <string>Zvzip extension (vector zip/unzip and pair)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          vzip\.vv |
+          vunzipe\.v |
+          vunzipo\.v |
+          vpaire\.vv |
+          vpairo\.vv
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zvzip</string>
+      </dict>
+
+
+      <!-- zvvmm instructions -->
+
+      <dict>
+        <key>comment</key>
+        <string>Zvvmm extension (integer matrix multiply-accumulate)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          vmmacc\.vv |
+          vwmmacc\.vv |
+          vqmmacc\.vv |
+          v8wmmacc\.vv
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zvvmm</string>
+      </dict>
+
+
+      <!-- zvvfmm instructions -->
+
+      <dict>
+        <key>comment</key>
+        <string>Zvvfmm extension (floating-point matrix multiply-accumulate)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          vfmmacc\.vv |
+          vfwmmacc\.vv |
+          vfqmmacc\.vv |
+          vf8wmmacc\.vv |
+          vfwimmacc\.vv |
+          vfqimmacc\.vv |
+          vf8wimmacc\.vv
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zvvfmm</string>
+      </dict>
+
+
+      <!-- zvvmtls instructions -->
+
+      <dict>
+        <key>comment</key>
+        <string>Zvvmtls extension (matrix tile load/store)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          vmtl\.v |
+          vmts\.v
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zvvmtls</string>
+      </dict>
+
+
+      <!-- zvvmttls instructions -->
+
+      <dict>
+        <key>comment</key>
+        <string>Zvvmttls extension (transposing matrix tile load/store)</string>
+        <key>match</key>
+        <string>(?ix)\b(
+          vmttl\.v |
+          vmtts\.v
+          )\b</string>
+        <key>name</key>
+        <string>support.function.riscv.zvvmttls</string>
+      </dict>
+
+      <!-- p instructions -->
+      <dict>
+        <key>comment</key>
+        <string>P extension (Packed-SIMD)</string>
         <key>match</key>
         <string>(?ix)\b(
           absw? |
@@ -478,12 +784,10 @@
           psext\.w\.[bh] |
           pslli\.[bhw] |
           psslai\.[hw] |
-          rev16 |
-          rev8? |
-          sslai
+          rev16
           )\b</string>
         <key>name</key>
-        <string>support.function.riscv.q</string>
+        <string>support.function.riscv.p</string>
       </dict>
 
       <!-- zawrs instructions -->
@@ -506,7 +810,9 @@
         <string>zba extension</string>
         <key>match</key>
         <string>(?ix)\b(
-          sh[123]add(\.uw)?
+          add\.uw |
+          sh[123]add(\.uw)? |
+          slli\.uw
           )\b</string>
         <key>name</key>
         <string>support.function.riscv.zba</string>
@@ -655,7 +961,7 @@
         <string>(?ix)\b(
           c\.sspopchk |
           c\.sspush |
-          ssamoswap.[dw](.(aq)?(rl)?)? |
+          ssamoswap\.[dw](\.(aq)?(rl)?)? |
           sspopchk |
           sspush |
           ssrdp
@@ -1075,6 +1381,7 @@
           ft[7-9] |
           ft1[01] |
           gp |
+          pc |
           ra |
           rdn |
           rmm |
@@ -1100,7 +1407,7 @@
           m[au] |
           mf?[248] |
           t[au] |
-          v[0](\.t)? |
+          v[0](\.t|\.scale)? |
           v[1-9] |
           v[12][0-9] |
           v3[01]
@@ -1128,6 +1435,7 @@
           dpc |
           dscratch |
           dscratch[0-1] |
+          etrigger |
           fcsr |
           fflags |
           frm |
@@ -1147,19 +1455,24 @@
           iorw |
           jvt |
           m?cycleh? |
+          mcyclecfg[h]? |
           m?hpmcounter([3-9]|[12][0-9]|3[01])h? |
           m?instreth? |
+          minstretcfg[h]? |
           marchid |
           mconfigptr |
           mcontext |
           mcountinhibit |
           mctrctl |
+          mijt |
           menvcfgh? |
           mhartid |
           mhpmevent([3-9]|[12][0-9]|3[01])h? |
           midelegh |
           mieh |
           mimpid |
+          icount |
+          itrigger |
           miph |
           mireg[2-6]? |
           misa |
@@ -1189,6 +1502,12 @@
           rw |
           scontext |
           scountovf |
+          scountinhibit |
+          sctrctl |
+          sctrdepth |
+          sctrstatus |
+          ssp |
+          sspcs |
           seed |
           senvcfg |
           sieh? |
@@ -1197,6 +1516,7 @@
           siselect |
           srmcfg |
           sstateen[0-3] |
+          sijt |
           stimecmph? |
           stopei |
           stopi |
@@ -1218,6 +1538,7 @@
           vtype |
           vxrm |
           vxsat |
+          vsctrctl |
           w
           )\b</string>
         <key>name</key>

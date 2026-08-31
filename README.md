@@ -9,7 +9,7 @@ This VSCode extension provides basic RISC-V colorization and snippets support. A
 
 ![colors](images/riscv-colors.png)
 
-## All Supported Extensions
+## All Supported Extensions (ordered by LLVM extension name)
 1. `A` Atomic Extension, version 2.1
 1. `B` Bitmanip Extension, version 1.0
 1. `C` Compressed Extension, version 2.0
@@ -20,8 +20,8 @@ This VSCode extension provides basic RISC-V colorization and snippets support. A
 1. `H` Hypervisor Extension, version 1.0
 1. `I` (`RV32I` / `RV64I` / `RV128I`) Integer Extension, version 2.1
 1. `M` Multiplication Extension, version 2.0
-1. `P` Extension, version 0.14
-1. `Q` Quard-Precision Extension
+1. `P` Extension, version 0.21
+1. `Q` Quard-Precision Extension, version 2.2
 1. `Sdext` Extension, version 1.0
 1. `Sdtrig` Extension, version 1.0
 1. `Sha` Extension, version 1.0
@@ -67,7 +67,7 @@ This VSCode extension provides basic RISC-V colorization and snippets support. A
 1. `Svinval` Extension, version 1.0
 1. `Svnapot` Extension, version 1.0
 1. `Svpbmt` Extension, version 1.0
-1. `Svukte` Extension, version 0.3
+1. `Svukte` Extension, version 1.0
 1. `Svvptc` Extension, version 1.0
 1. `V` Vector Extension, version 1.0
 1. `Za128rs` Extension, version 1.0
@@ -75,7 +75,7 @@ This VSCode extension provides basic RISC-V colorization and snippets support. A
 1. `Zaamo` Extension, version 1.0
 1. `Zabha` Extension, version 1.0
 1. `Zacas` Extension, version 1.0
-1. `Zalasr` Extension, version 0.1
+1. `Zalasr` Extension, version 1.0
 1. `Zalrsc` Extension, version 1.0
 1. `Zama16b` Extension, version 1.0
 1. `Zawrs` Extension, version 1.0
@@ -103,6 +103,7 @@ This VSCode extension provides basic RISC-V colorization and snippets support. A
 1. `Zfinx` Extension, version 1.0
 1. `Zhinx` Extension, version 1.0
 1. `Zhinxmin` Extension, version 1.0
+1. `Zibi` Extension, version 0.1
 1. `Zic64b` Extension, version 1.0
 1. `Zicbom` Extension, version 1.0
 1. `Zicbop` Extension, version 1.0
@@ -122,6 +123,7 @@ This VSCode extension provides basic RISC-V colorization and snippets support. A
 1. `Zihintpause` Extension, version 2.0
 1. `Zihpm` Extension, version 2.0
 1. `Zilsd` Extension, version 1.0
+1. `Zilx` Extension, version 0.1
 1. `Zimop` Extension, version 1.0
 1. `Zk` Extension, version 1.0
 1. `Zkn` Extension, version 1.0
@@ -135,18 +137,27 @@ This VSCode extension provides basic RISC-V colorization and snippets support. A
 1. `Zkt` Extension, version 1.0
 1. `Zmmul` Extension, version 1.0
 1. `Ztso` Extension, version 1.0
+1. `Zvabd` Extension, version 0.9
 1. `Zvbb` Extension, version 1.0
 1. `Zvbc` Extension, version 1.0
 1. `Zvbc32e` Extension, version 0.7
+1. `Zvdot4a8i` Extension, version 0.1
 1. `Zve32f` Extension, version 1.0
 1. `Zve32x` Extension, version 1.0
 1. `Zve64d` Extension, version 1.0
 1. `Zve64f` Extension, version 1.0
 1. `Zve64x` Extension, version 1.0
+1. `Zvfbdota32f` Extension, version 0.2
+1. `Zvfbfa` Extension, version 0.1
 1. `Zvfbfmin` Extension, version 1.0
 1. `Zvfbfwma` Extension, version 1.0
 1. `Zvfh` Extension, version 1.0
 1. `Zvfhmin` Extension, version 1.0
+1. `Zvfofp8min` Extension, version 0.2
+1. `Zvfqwbdota8f` Extension, version 0.2
+1. `Zvfqwdota8f` Extension, version 0.2
+1. `Zvfwbdota16bf` Extension, version 0.2
+1. `Zvfwdota16bf` Extension, version 0.2
 1. `Zvkb` Extension, version 1.0
 1. `Zvkg` Extension, version 1.0
 1. `Zvkgs` Extension, version 0.7
@@ -175,6 +186,15 @@ This VSCode extension provides basic RISC-V colorization and snippets support. A
 1. `Zvl65536b` Extension, version 1.0
 1. `Zvl8192b` Extension, version 1.0
 1. `Zvqdotq` Extension, version 0.0
+1. `Zvqwbdota16i` Extension, version 0.2
+1. `Zvqwbdota8i` Extension, version 0.2
+1. `Zvqwdota16i` Extension, version 0.2
+1. `Zvqwdota8i` Extension, version 0.2
+1. `Zvvfmm` Extension, version 0.1
+1. `Zvvmm` Extension, version 0.1
+1. `Zvvmtls` Extension, version 0.1
+1. `Zvvmttls` Extension, version 0.1
+1. `Zvzip` Extension, version 0.1
 
 ## Supported Vendor Extensions
 1. `Xsfvcp` Extension, version 1.0
@@ -194,7 +214,7 @@ This VSCode extension provides basic RISC-V colorization and snippets support. A
 1. `Xepi` Extension, version 1.0
 1. `Xmipscmov` Extension, version 1.0
 1. `Xmipslsp` Extension, version 1.0
-1. `Xqccmp` Extension, version 0.1
+1. `Xqccmp` Extension, version 0.3
 1. `Xqcia` Extension, version 0.7
 1. `Xqciac` Extension, version 0.3
 1. `Xqcibi` Extension, version 0.2
@@ -202,14 +222,14 @@ This VSCode extension provides basic RISC-V colorization and snippets support. A
 1. `Xqcicli` Extension, version 0.3
 1. `Xqcicm` Extension, version 0.2
 1. `Xqcics` Extension, version 0.2
-1. `Xqcicsr` Extension, version 0.3
-1. `Xqciint` Extension, version 0.7
+1. `Xqcicsr` Extension, version 0.4
+1. `Xqciint` Extension, version 0.10
 1. `Xqciio` Extension, version 0.1
 1. `Xqcilb` Extension, version 0.2
 1. `Xqcili` Extension, version 0.2
 1. `Xqcilia` Extension, version 0.2
 1. `Xqcilo` Extension, version 0.3
-1. `Xqcilsm` Extension, version 0.5
+1. `Xqcilsm` Extension, version 0.6
 1. `Xqcisim` Extension, version 0.2
 1. `Xqcisls` Extension, version 0.2
 1. `Xqcisync` Extension, version 0.3
@@ -259,4 +279,4 @@ This VSCode extension provides basic RISC-V colorization and snippets support. A
 
 ## Snippets
 
-The extension is based on Textmate's [MIPS bundle](https://github.com/textmate/mips.tmbundle).
+The extension is based on TextMate's [MIPS bundle](https://github.com/textmate/mips.tmbundle).
